@@ -209,49 +209,23 @@ class VisualizingTheData:
     def plotting_the_forces():
         organized_class = NamingColumnsOfData()
         organized_stripped_data = organized_class.ordering_order_columns()
-
         calculated_class = PerformingCalculations()
         internal_forces_data = calculated_class.calculating_internal_forces_from_data()
 
         horizontal_axis_internal_forces = organized_stripped_data[:, 0]
-        vertical_axis_internal_forces_1 = internal_forces_data[:, 0]
-        vertical_axis_internal_forces_2 = internal_forces_data[:, 1]
-        vertical_axis_internal_forces_3 = internal_forces_data[:, 2]
-        vertical_axis_internal_forces_4 = internal_forces_data[:, 3]
-        vertical_axis_internal_forces_5 = internal_forces_data[:, 4]
-
+        vertical_axis_internal_forces = [internal_forces_data[:, 0], internal_forces_data[:, 1],
+                                         internal_forces_data[:, 2], internal_forces_data[:, 3],
+                                         internal_forces_data[:, 4]]
+        plot_title = ['Internal Force Rear-most Tube, [N]', 'Internal Force Tube Parallel To Chain, [N]',
+                      'Internal Force Sitting Tube, [N]', 'Internal Force Horizontal Tube, [N]',
+                      'Internal Force Front Angled Tube, [N]']
         plt.figure(1, figsize=(20, 13))
-
-        plt.subplot(5, 1, 1)
-        plt.scatter(horizontal_axis_internal_forces, vertical_axis_internal_forces_1, s=1, marker=',')
-        plt.grid(True)
-        plt.title('Internal Force Rear-most Tube, [N]')
-        plt.xticks([])
-
-        plt.subplot(5, 1, 2)
-        plt.scatter(horizontal_axis_internal_forces, vertical_axis_internal_forces_2, s=1, marker=',')
-        plt.grid(True)
-        plt.title('Internal Force Tube Parallel To Chain, [N]')
-        plt.xticks([])
-
-        plt.subplot(5, 1, 3)
-        plt.scatter(horizontal_axis_internal_forces, vertical_axis_internal_forces_3, s=1, marker=',')
-        plt.grid(True)
-        plt.title('Internal Force Sitting Tube, [N]')
-        plt.xticks([])
-
-        plt.subplot(5, 1, 4)
-        plt.grid(True)
-        plt.scatter(horizontal_axis_internal_forces, vertical_axis_internal_forces_4, s=1, marker=',')
-        plt.title('Internal Force Horizontal Tube, [N]')
-        plt.xticks([])
-
-        plt.subplot(5, 1, 5)
-        plt.scatter(horizontal_axis_internal_forces, vertical_axis_internal_forces_5, s=1, marker=',')
-        plt.grid(True)
-        plt.title('Internal Force Front Angled Tube, [N]')
-        plt.xticks([])
-
+        for i in range(5):
+            plt.subplot(5, 1, i+1)
+            plt.scatter(horizontal_axis_internal_forces, vertical_axis_internal_forces[i], s=1, marker=',')
+            plt.grid(True)
+            plt.title(plot_title[i])
+            plt.xticks([])
         plt.tight_layout()
         plt.show()
 
