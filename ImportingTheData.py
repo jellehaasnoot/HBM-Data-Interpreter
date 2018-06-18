@@ -2,39 +2,38 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-##
-class ConstantValues:
-    globals()
-    alpha = 68.7
-    gamma = 45.5
-    beta = 180 - gamma - alpha
-    delta = 77
-    epsilon = 73
-    tau = 45.7
-    zeta = 73
-    eta = 180 - delta - tau
+# Constants dimensions
+alpha = 68.7
+gamma = 45.5
+beta = 180 - gamma - alpha
+delta = 77
+epsilon = 73
+tau = 45.7
+zeta = 73
+eta = 180 - delta - tau
+ksi = epsilon - beta
+theta = 90 - beta - ksi
+phi = 90 - alpha + ksi
+l_sitting_tube = 0.580
+l_rear_most_angled_tube = (np.sin(np.deg2rad(beta)) * l_sitting_tube)/np.sin(np.deg2rad(alpha))
+l_rear_bracket_COM = np.sin(np.deg2rad(phi)) * l_rear_most_angled_tube
+l_wheelbase = 0.991
+l_front_bracket_COM = l_wheelbase - l_rear_bracket_COM
 
-    ksi = epsilon - beta
-    theta = 90 - beta - ksi
-    phi = 90 - alpha + ksi
+# Constants areas bike tubes
+A_horz_tube = np.pi * ((34.9 / 2) ** 2 - ((34.9 - 2.6) / 2) ** 2)
+A_sitt_tube = np.pi * ((31.8 / 2) ** 2 - ((31.8 - 3.2) / 2) ** 2)
+A_fron_tube = np.pi * ((5 / 2) ** 2 - ((5 - 2.6) / 2) ** 2)
+A_rear_tube = 97.3
+A_chai_tube = 98.7
 
-    mass_cyclist = 83
-    gravitational_constant = 9.81
+# Other constants needed to calculate the force
+mass_cyclist = 83
+gravitational_constant = 9.81
 
-    l_sitting_tube = 0.580
-    l_rear_most_angled_tube = (np.sin(np.deg2rad(beta)) * l_sitting_tube)/np.sin(np.deg2rad(alpha))
-    l_rear_bracket_COM = np.sin(np.deg2rad(phi)) * l_rear_most_angled_tube
-    l_wheelbase = 0.991
-    l_front_bracket_COM = l_wheelbase - l_rear_bracket_COM
-
-    F_y4 = (mass_cyclist * gravitational_constant) / (1 + (l_front_bracket_COM / l_rear_bracket_COM))
-    F_y1 = mass_cyclist * gravitational_constant - F_y4
-
-    A_horz_tube = np.pi * ((34.9 / 2) ** 2 - ((34.9 - 2.6) / 2) ** 2)
-    A_sitt_tube = np.pi * ((31.8 / 2) ** 2 - ((31.8 - 3.2) / 2) ** 2)
-    A_fron_tube = np.pi * ((5 / 2) ** 2 - ((5 - 2.6) / 2) ** 2)
-    A_rear_tube = 97.3
-    A_chai_tube = 98.7
+# Calculations for gravitational forces
+F_y4 = (mass_cyclist * gravitational_constant) / (1 + (l_front_bracket_COM / l_rear_bracket_COM))
+F_y1 = mass_cyclist * gravitational_constant - F_y4
 
 
 class OpeningAndOrganizingTheData:
@@ -185,11 +184,11 @@ class PerformingCalculations:
     def calculating_internal_forces_from_data():
         organized_class = NamingColumnsOfData()
 
-        a_rear_tube = float(ConstantValues.A_rear_tube)
-        a_chai_tube = float(ConstantValues.A_chai_tube)
-        a_sitt_tube = float(ConstantValues.A_sitt_tube)
-        a_horz_tube = float(ConstantValues.A_horz_tube)
-        a_fron_tube = float(ConstantValues.A_fron_tube)
+        a_rear_tube = float(A_rear_tube)
+        a_chai_tube = float(A_chai_tube)
+        a_sitt_tube = float(A_sitt_tube)
+        a_horz_tube = float(A_horz_tube)
+        a_fron_tube = float(A_fron_tube)
 
         organized_stripped_data = organized_class.ordering_order_columns()
 
@@ -236,7 +235,6 @@ np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
 # Classes
 Opening = OpeningAndOrganizingTheData()
 Naming = NamingColumnsOfData()
-Constants = ConstantValues()
 Calculations = PerformingCalculations()
 Visualizing = VisualizingTheData()
 
