@@ -67,7 +67,7 @@ class Data:
         self.file_name = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\PyCharmProjects",
                                                     title="Select file...",
                                                     filetypes=(("ASC Files", "*.asc"), ("All Files", "*.*")))
-        self.opened_file = open('DAQTest2_50Hz_+Channel_info.ASC', 'r')
+        self.opened_file = open(self.file_name, 'r')
         self.read_file = self.opened_file.read()
 
         os.remove('Intermediate_Text_File.txt')
