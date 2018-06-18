@@ -64,7 +64,7 @@ class Data:
     def __init__(self):
         root = tk.Tk()
         root.withdraw()
-        self.file_name = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\PyCharmProjects",
+        self.file_name = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\Documents",
                                                     title="Select file...",
                                                     filetypes=(("ASC Files", "*.asc"), ("All Files", "*.*")))
         self.opened_file = open(self.file_name, 'r')
@@ -84,6 +84,9 @@ class Data:
 
         for i in range(38):
             del self.lines[0]
+
+        self.opened_file.close()
+        new_text_file.close()
 
     def organizing(self):
         organized_as_single_columns = []
@@ -131,6 +134,11 @@ class Data:
         vertical_axis_internal_forces = [self.internal_forces[:, 0], self.internal_forces[:, 1],
                                          self.internal_forces[:, 2], self.internal_forces[:, 3],
                                          self.internal_forces[:, 4]]
+
+        horizontal_axis_internal_forces_maxima = self.organized_stripped_data[:, 0]
+        vertical_axis_internal_forces_maxima = [max(self.internal_forces[:, 0]), max(self.internal_forces[:, 1]),
+                                         max(self.internal_forces[:, 2]), max(self.internal_forces[:, 3]),
+                                         max(self.internal_forces[:, 4])]
         plot_title = ['Internal Force Rear-most Tube, [N]', 'Internal Force Tube Parallel To Chain, [N]',
                       'Internal Force Sitting Tube, [N]', 'Internal Force Horizontal Tube, [N]',
                       'Internal Force Front Angled Tube, [N]']
@@ -143,7 +151,18 @@ class Data:
             plt.xticks([])
         plt.tight_layout()
         plt.show()
+        plt.close()
 
+        plt.figure(2, figsize=(20, 13))
+        for i in range(5):
+            plt.subplot(5, 1, i + 1)
+            plt.bar(horizontal_axis_internal_forces_maxima, vertical_axis_internal_forces_maxima[i])
+            plt.grid(True)
+            plt.title(plot_title[i])
+            plt.xticks([])
+        plt.tight_layout()
+        plt.show()
+        plt.close()
 
 # Plot settings
 np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
