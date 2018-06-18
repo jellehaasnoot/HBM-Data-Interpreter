@@ -38,15 +38,16 @@ class ConstantValues:
 
 
 class OpeningAndOrganizingTheData:
-    '''In the following class, the Data is extracted from the ASCII Text file resulting from the test. This will be done
-        as follows: Open the file, read the file, write the file to a new file as an intermediate step, remove the lines
-        which contain no data, organize the columns so that they are recognized as single columns ... '''
+    """
+    In the following class, the Data is extracted from the ASCII Text file resulting from the test. This will be done
+    as follows: Open the file, read the file, write the file to a new file as an intermediate step, remove the lines
+    which contain no data, organize the columns so that they are recognized as single columns ...
+    """
 
     @staticmethod
     def opening_the_file():
         file_name = 'DAQTest2_50Hz_+Channel_info.ASC'
         matlab_file_contents = open(file_name, 'r')
-
         return matlab_file_contents
 
     @staticmethod
@@ -55,20 +56,16 @@ class OpeningAndOrganizingTheData:
         opened_file = previously_opened.opening_the_file()
         read_data = opened_file.read()
         opened_file.close()
-
         return read_data
 
     @staticmethod
     def writing_to_an_intermediate_file():
         previously_read = OpeningAndOrganizingTheData()
         read_file = previously_read.reading_the_file()
-
         os.remove('Intermediate_Text_File.txt')
         new_text_file = open('Intermediate_Text_File.txt', 'w')
-
         for line in read_file:
             new_text_file.write(line)
-
         new_text_file.close()
         return new_text_file
 
@@ -76,7 +73,6 @@ class OpeningAndOrganizingTheData:
     def removing_lines_that_are_not_needed():
         previously_opened = OpeningAndOrganizingTheData()
         opened_file = previously_opened.opening_the_file()
-
         lines = opened_file.readlines()
         opened_file.close()
 
@@ -88,7 +84,6 @@ class OpeningAndOrganizingTheData:
     def organizing():
         previously_read = OpeningAndOrganizingTheData()
         read_file = previously_read.removing_lines_that_are_not_needed()
-
         organized_as_single_columns = []
 
         for i in range(len(read_file)):
@@ -99,9 +94,12 @@ class OpeningAndOrganizingTheData:
 
 
 class NamingColumnsOfData:
-    '''In this class the columns of the dataset will be named and assigned values from the processed data. This will
+    """
+    In this class the columns of the dataset will be named and assigned values from the processed data. This will
     be done by firstly, creating names for each column of the data file, then organizing the columns from the
-    original file to match them to the right values, then deleting the unused columns.'''
+    original file to match them to the right values, then deleting the unused columns.
+    """
+
     @staticmethod
     def creating_list_of_names():
         list_of_column_names_strain = ['Horizontal_tube_rosette_1_strain', 'Horizontal_tube_rosette_2_strain',
@@ -173,14 +171,16 @@ class NamingColumnsOfData:
         organized_data[:, [36, 27]] = organized_data[:, [27, 36]]
 
         organized_stripped_data = organized_data[:, range(28)]
-
         return organized_stripped_data
 
 
 class PerformingCalculations:
-    '''In this class a number of small calculations are performed. Some cross-sectional values are calculated, the
+    """
+    In this class a number of small calculations are performed. Some cross-sectional values are calculated, the
     values from the original file are "floated" and the internal stresses are multiplied by their respective cross-
-    section, so the internal force is calculated.'''
+    section, so the internal force is calculated.
+    """
+
     @staticmethod
     def calculating_internal_forces_from_data():
         organized_class = NamingColumnsOfData()
@@ -201,6 +201,9 @@ class PerformingCalculations:
         return internal_forces
 
 class VisualizingTheData:
+    """
+    Making figures to show the resulting forces of the strain gauges.
+    """
 
     @staticmethod
     def plotting_the_forces():
@@ -253,31 +256,29 @@ class VisualizingTheData:
         plt.show()
 
 
-class RunningImportingTheData:
-    np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
+# Plot settings
+np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
 
-    # Classes
-    Opening = OpeningAndOrganizingTheData()
-    Naming = NamingColumnsOfData()
-    Constants = ConstantValues()
-    Calculations = PerformingCalculations()
-    Visualizing = VisualizingTheData()
+# Classes
+Opening = OpeningAndOrganizingTheData()
+Naming = NamingColumnsOfData()
+Constants = ConstantValues()
+Calculations = PerformingCalculations()
+Visualizing = VisualizingTheData()
 
-    # Functions
-    Opening.opening_the_file()
-    Read = Opening.reading_the_file()
-    Opening.writing_to_an_intermediate_file()
-    Opening.removing_lines_that_are_not_needed()
-    Organized = Naming.ordering_order_columns()
-    Calculated = Calculations.calculating_internal_forces_from_data()
-    Visualizing.plotting_the_forces()
+# Functions
+Opening.opening_the_file()
+Read = Opening.reading_the_file()
+Opening.writing_to_an_intermediate_file()
+Opening.removing_lines_that_are_not_needed()
+Organized = Naming.ordering_order_columns()
+Calculated = Calculations.calculating_internal_forces_from_data()
+Visualizing.plotting_the_forces()
 
-    print(len(Organized))
-    print(len(Organized[0]))
-    print(len(Calculated))
-    print(len(Calculated[0]))
-    print(np.amax(Calculated))
-
-
-    # print(Organized)
-    print(Calculated)
+# print(len(Organized))
+# print(len(Organized[0]))
+# print(len(Calculated))
+# print(len(Calculated[0]))
+# print(np.amax(Calculated))
+# print(Organized)
+# print(Calculated)
