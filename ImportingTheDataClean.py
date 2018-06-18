@@ -91,54 +91,19 @@ class Data:
         for i in range(len(self.lines)):
             organized_as_single_columns.append(self.lines[i].split())
 
-        organized_data = np.array([np.array(j) for j in organized_as_single_columns])
+        self.organized_data = np.array([np.array(j) for j in organized_as_single_columns])
+        organized_data = self.organized_data
 
-        # Horizontal_tube_rosette_strain
-        organized_data[:, [9, 1]] = organized_data[:, [1, 9]]
-        organized_data[:, [10, 2]] = organized_data[:, [2, 10]]
-        organized_data[:, [11, 3]] = organized_data[:, [3, 11]]
+        # TODO: Getallen fixen
+        values_to_convert = [[9, 1], [10, 2], [11, 3], [6, 4], [7, 5], [8, 6], [12, 7], [13, 8], [14, 9], [15, 10],
+                             [5, 11], [4, 12], [21, 16], [22, 17], [23, 18], [27, 19], [28, 20], [29, 21], [30, 22],
+                             [20, 23], [19, 24], [30, 22], [20, 23], [19, 24], [34, 25], [35, 26], [36, 27]]
 
-        # Sitting_tube_rosette_strain
-        organized_data[:, [6, 4]] = organized_data[:, [4, 6]]
-        organized_data[:, [7, 5]] = organized_data[:, [5, 7]]
-        organized_data[:, [8, 6]] = organized_data[:, [6, 8]]
+        for i in range(len(values_to_convert)):
+            self.organized_data[:, values_to_convert[i]] = self.organized_data[:, values_to_convert[i][::-1]]
 
-        # Front_angled_tube_rosette_strain
-        organized_data[:, [12, 7]] = organized_data[:, [7, 12]]
-        organized_data[:, [13, 8]] = organized_data[:, [8, 13]]
-        organized_data[:, [14, 9]] = organized_data[:, [9, 14]]
-
-        # Single strain gauges - strain
-        organized_data[:, [15, 10]] = organized_data[:, [10, 15]]
-        organized_data[:, [5, 11]] = organized_data[:, [11, 5]]
-        organized_data[:, [4, 12]] = organized_data[:, [12, 4]]
-
-        # Horizontal_tube_rosette_stress
-        organized_data[:, [24, 13]] = organized_data[:, [13, 24]]
-        organized_data[:, [25, 14]] = organized_data[:, [14, 25]]
-        organized_data[:, [26, 15]] = organized_data[:, [15, 26]]
-
-        # Sitting_tube_rosette_stress
-        organized_data[:, [21, 16]] = organized_data[:, [16, 21]]
-        organized_data[:, [22, 17]] = organized_data[:, [17, 22]]
-        organized_data[:, [23, 18]] = organized_data[:, [18, 23]]
-
-        # Front_angled_tube_rosette_stress
-        organized_data[:, [27, 19]] = organized_data[:, [19, 27]]
-        organized_data[:, [28, 20]] = organized_data[:, [20, 28]]
-        organized_data[:, [29, 21]] = organized_data[:, [21, 29]]
-
-        # Single strain gauges - stress
-        organized_data[:, [30, 22]] = organized_data[:, [22, 30]]
-        organized_data[:, [20, 23]] = organized_data[:, [23, 20]]
-        organized_data[:, [19, 24]] = organized_data[:, [24, 19]]
-
-        # Rosette_main_stresses
-        organized_data[:, [34, 25]] = organized_data[:, [25, 34]]
-        organized_data[:, [35, 26]] = organized_data[:, [26, 35]]
-        organized_data[:, [36, 27]] = organized_data[:, [27, 36]]
-
-        self.organized_stripped_data = organized_data[:, range(28)]
+        self.organized_stripped_data = self.organized_data[:, range(28)]
+        print(self.organized_stripped_data)
 
     def calculations(self):
         a_rear_tube = float(A_rear_tube)
