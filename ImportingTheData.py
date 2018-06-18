@@ -1,6 +1,8 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+import tkinter as tk
+from tkinter import filedialog
 
 # Constants dimensions
 alpha = 68.7
@@ -45,7 +47,10 @@ class OpeningAndOrganizingTheData:
 
     @staticmethod
     def opening_the_file():
-        file_name = 'DAQTest2_50Hz_+Channel_info.ASC'
+        root = tk.Tk()
+        root.withdraw()
+        file_name = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\PyCharmProjects", title="Select file...", filetypes=(("ASC Files", "*.asc"), ("All Files", "*.*")))
+        #file_name = 'DAQTest2_50Hz_+Channel_info.ASC'
         matlab_file_contents = open(file_name, 'r')
         return matlab_file_contents
 
