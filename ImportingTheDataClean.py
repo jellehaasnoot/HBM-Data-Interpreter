@@ -85,6 +85,9 @@ class Data:
         for i in range(38):
             del self.lines[0]
 
+        self.opened_file.close()
+        new_text_file.close()
+
     def organizing(self):
         organized_as_single_columns = []
 
@@ -183,6 +186,7 @@ class Data:
             plt.xticks([])
         plt.tight_layout()
         plt.show()
+        plt.close()
 
         plt.figure(2, figsize=(20, 13))
         for i in range(5):
@@ -193,6 +197,7 @@ class Data:
             plt.xticks([])
         plt.tight_layout()
         plt.show()
+        plt.close()
 
 # Plot settings
 np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
