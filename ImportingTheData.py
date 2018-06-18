@@ -50,47 +50,27 @@ class OpeningAndOrganizingTheData:
         root = tk.Tk()
         root.withdraw()
         file_name = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\PyCharmProjects", title="Select file...", filetypes=(("ASC Files", "*.asc"), ("All Files", "*.*")))
-        #file_name = 'DAQTest2_50Hz_+Channel_info.ASC'
-        matlab_file_contents = open(file_name, 'r')
-        return matlab_file_contents
+        opened_file = open(file_name, 'r')
 
-    @staticmethod
-    def reading_the_file():
-        previously_opened = OpeningAndOrganizingTheData()
-        opened_file = previously_opened.opening_the_file()
-        read_data = opened_file.read()
+        read_file = opened_file.read()
         opened_file.close()
-        return read_data
 
-    @staticmethod
-    def writing_to_an_intermediate_file():
-        previously_read = OpeningAndOrganizingTheData()
-        read_file = previously_read.reading_the_file()
-        os.remove('Intermediate_Text_File.txt')
-        new_text_file = open('Intermediate_Text_File.txt', 'w')
+        # os.remove('Intermediate_Text_File.txt')
+        new_text_file = open('Intermediate_Text_File.txt')
         for line in read_file:
             new_text_file.write(line)
         new_text_file.close()
-        return new_text_file
 
-    @staticmethod
-    def removing_lines_that_are_not_needed():
-        previously_opened = OpeningAndOrganizingTheData()
-        opened_file = previously_opened.opening_the_file()
+        # Removing the unnecessary lines in the text file
         lines = opened_file.readlines()
         opened_file.close()
 
         for i in range(38):
             del lines[0]
-        return lines
 
-    @staticmethod
-    def organizing():
-        previously_read = OpeningAndOrganizingTheData()
-        read_file = previously_read.removing_lines_that_are_not_needed()
         organized_as_single_columns = []
 
-        for i in range(len(read_file)):
+        for i in range(len(lines)):
             organized_as_single_columns.append(read_file[i].split())
 
         organized_as_array = np.array([np.array(j) for j in organized_as_single_columns])
@@ -245,9 +225,6 @@ Visualizing = VisualizingTheData()
 
 # Functions
 Opening.opening_the_file()
-Read = Opening.reading_the_file()
-Opening.writing_to_an_intermediate_file()
-Opening.removing_lines_that_are_not_needed()
 Organized = Naming.ordering_order_columns()
 Calculated = Calculations.calculating_internal_forces_from_data()
 Visualizing.plotting_the_forces()
