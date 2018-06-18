@@ -49,7 +49,7 @@ class OpeningAndOrganizingTheData:
     def opening_the_file():
         root = tk.Tk()
         root.withdraw()
-        file_name = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\PyCharmProjects", title="Select file...", filetypes=(("ASC Files", "*.asc"), ("Text Files", "*.txt"), ("All Files", "*.*")))
+        file_name = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\PyCharmProjects", title="Select file...", filetypes=(("ASC Files", "*.asc"), ("All Files", "*.*")))
         #file_name = 'DAQTest2_50Hz_+Channel_info.ASC'
         matlab_file_contents = open(file_name, 'r')
         return matlab_file_contents
