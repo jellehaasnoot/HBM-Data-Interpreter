@@ -157,10 +157,9 @@ class Data:
                                          self.internal_forces[:, 2], self.internal_forces[:, 3],
                                          self.internal_forces[:, 4]]
 
-        horizontal_axis_internal_forces_maxima = self.organized_stripped_data[:, 0]
-        vertical_axis_internal_forces_maxima = [max(self.internal_forces[:, 0]), max(self.internal_forces[:, 1]),
-                                         max(self.internal_forces[:, 2]), max(self.internal_forces[:, 3]),
-                                         max(self.internal_forces[:, 4])]
+        horizontal_axis_internal_forces_maxima = [1, 2]
+        vertical_axis_internal_forces_maxima = [10, 20]
+
         plot_title = ['Internal Force Rear-most Tube, [N]', 'Internal Force Tube Parallel To Chain, [N]',
                       'Internal Force Sitting Tube, [N]', 'Internal Force Horizontal Tube, [N]',
                       'Internal Force Front Angled Tube, [N]']
@@ -172,19 +171,16 @@ class Data:
             plt.title(plot_title[i])
             plt.xticks([])
         plt.tight_layout()
-        #plt.show()
-        #plt.close()
 
         plt.figure(2, figsize=(20, 13))
         for i in range(5):
             plt.subplot(5, 1, i + 1)
-            plt.bar(horizontal_axis_internal_forces_maxima, vertical_axis_internal_forces_maxima[i])
+            plt.bar(horizontal_axis_internal_forces_maxima, vertical_axis_internal_forces_maxima, color='b')
             plt.grid(True)
             plt.title(plot_title[i])
             plt.xticks([])
         plt.tight_layout()
-        #plt.show()
-        #plt.close()
+        plt.show()
 
 # Plot settings
 np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
@@ -195,5 +191,4 @@ data = Data()
 # Functions
 data.organizing()
 data.calculations()
-data.counting()
 data.plotting()
