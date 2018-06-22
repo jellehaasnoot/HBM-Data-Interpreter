@@ -95,18 +95,15 @@ class Data:
             organized_as_single_columns.append(self.lines[i].split())
 
         self.organized_data = np.array([np.array(j) for j in organized_as_single_columns])
-        organized_data = self.organized_data
 
-        # TODO: Getallen fixen
         values_to_convert = [[9, 1], [10, 2], [11, 3], [6, 4], [7, 5], [8, 6], [12, 7], [13, 8], [14, 9], [15, 10],
-                             [5, 11], [4, 12], [21, 16], [22, 17], [23, 18], [27, 19], [28, 20], [29, 21], [30, 22],
-                             [20, 23], [19, 24], [30, 22], [20, 23], [19, 24], [34, 25], [35, 26], [36, 27]]
+                             [5, 11], [4, 12], [24, 13], [25, 14], [26, 15], [21, 16], [22, 17], [23, 18], [27, 19],
+                             [28, 20], [29, 21], [30, 22], [20, 23], [19, 24], [34, 25], [35, 26], [36, 27]]
 
         for i in range(len(values_to_convert)):
             self.organized_data[:, values_to_convert[i]] = self.organized_data[:, values_to_convert[i][::-1]]
 
         self.organized_stripped_data = self.organized_data[:, range(28)]
-        print(self.organized_stripped_data)
 
     def calculations(self):
         a_rear_tube = float(A_rear_tube)
