@@ -142,14 +142,18 @@ class Data:
             force_ranges.append(min_force + i*0.5)
 
         counts = [[]]
+        sum_peaks = []
 
-        for j in range(len(force_ranges)):
-            for i in range(len(self.internal_forces)):
-                if self.internal_forces[j, i + 2] < self.internal_forces[j, i + 1] < self.internal_forces[j, i]:
-                    counts[j, i + 1] += 1
+        for i in range(len(self.internal_forces)):
+            for k in range(len(self.internal_forces[i])):
+                for j in range(len(force_ranges)):
+                    if self.internal_forces[j] < self.internal_forces[k] < self.internal_forces[j + 1]:
+                        sum_peaks += 1
 
                 else:
                     pass
+
+            counts[j, i].append(sum_peaks[j, i])
 
     def plotting(self):
         horizontal_axis_internal_forces = self.organized_stripped_data[:, 0]
