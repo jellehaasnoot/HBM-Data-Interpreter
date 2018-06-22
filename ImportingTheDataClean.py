@@ -147,11 +147,11 @@ class Data:
         for i in range(len(self.internal_forces)):
             for k in range(len(self.internal_forces[i])):
                 for j in range(len(force_ranges)):
-                    if self.internal_forces[j] < self.internal_forces[k] < self.internal_forces[j + 1]:
+                    if force_ranges[j] < self.internal_forces[i, k] < force_ranges[j + 1]:
                         sum_peaks += 1
-
-                else:
-                    pass
+                    
+                    else:
+                        pass
 
             counts[j, i].append(sum_peaks[j, i])
 
@@ -184,7 +184,7 @@ class Data:
             plt.title(plot_title[i])
             plt.xticks([])
         plt.tight_layout()
-        plt.show()
+        # plt.show()
 
 # Plot settings
 np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
