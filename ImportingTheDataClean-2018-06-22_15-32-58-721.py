@@ -129,6 +129,7 @@ class Data:
                                                                      float(self.organized_stripped_data[i, 20])
                                                                      * a_fron_tube]], axis=0)
 
+
     def counting(self):
         self.max_force = max(self.internal_forces)
         self.min_force = min(self.internal_forces)
@@ -143,6 +144,7 @@ class Data:
             for i in range(len(self.internal_forces)):
                 print('lol')
         # self.internal_forces[j]
+
 
     def plotting(self):
         horizontal_axis_internal_forces = self.organized_stripped_data[:, 0]
