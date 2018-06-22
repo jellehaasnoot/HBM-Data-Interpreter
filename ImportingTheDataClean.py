@@ -155,18 +155,22 @@ class Data:
             force_ranges.append(min_force + i*0.5)
 
         counts = [[]]
+        sum_peaks = 0
+        sum_per_range = []
+        sum_per_column = []
 
         for i in range(len(self.internal_forces)):
             for k in range(len(self.internal_forces[i])):
-                sum_peaks = [[]]
                 for j in range(len(force_ranges) - 1):
                     if force_ranges[j] < self.internal_forces[i, k] < force_ranges[j + 1]:
-                        sum_peaks[i][j] += 1
-                        print(sum_peaks)
+                        sum_peaks += 1
+                        # print(sum_peaks)
                     else:
                         pass
-            counts[i].append(sum_peaks[i])
+                sum_per_range.append(sum_peaks)
+            sum_per_column.append(sum_per_range[i])
 
+        print(sum_per_column)
 
 
     def plotting(self):
