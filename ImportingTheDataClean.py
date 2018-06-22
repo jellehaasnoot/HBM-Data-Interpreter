@@ -127,19 +127,29 @@ class Data:
                                                                      * a_fron_tube]], axis=0)
 
     def counting(self):
-        self.max_force = max(self.internal_forces)
-        self.min_force = min(self.internal_forces)
-        self.force_ranges = []
-        self.outer_range = self.max_force - self.min_force
-        print(self.outer_range)
-        for i in range(round(self.outer_range/0.5)):
-            self.outer_range.append(self.min_force + i*0.5)
-        print(self.outer_range)
+        max_force_columns = []
+        min_force_columns = []
+        for i in range(len(self.internal_forces)):
+            max_force_columns.append(max(self.internal_forces[i]))
+            min_force_columns.append(min(self.internal_forces[i]))
 
-        for j in range(len(self.force_ranges)):
+        max_force = max(max_force_columns)
+        min_force = min(min_force_columns)
+
+        force_ranges = []
+        outer_range = max_force - min_force
+        for i in range(int(round(outer_range/0.5, 1))):
+            force_ranges.append(min_force + i*0.5)
+
+        counts = [[]]
+
+        for j in range(len(force_ranges)):
             for i in range(len(self.internal_forces)):
-                print('lol')
-        # self.internal_forces[j]
+                if self.internal_forces[j, i + 2] < self.internal_forces[j, i + 1] < self.internal_forces[j, i]:
+                    counts[j, i + 1] += 1
+
+                else:
+                    pass
 
     def plotting(self):
         horizontal_axis_internal_forces = self.organized_stripped_data[:, 0]
@@ -185,5 +195,5 @@ data = Data()
 # Functions
 data.organizing()
 data.calculations()
-data.plotting()
 data.counting()
+data.plotting()
