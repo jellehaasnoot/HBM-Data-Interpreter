@@ -89,6 +89,9 @@ class Data:
         new_text_file.close()
 
     def organizing(self):
+        """
+        This function is used to organize the input data which is given in the loaded text file.
+        """
         organized_as_single_columns = []
 
         for i in range(len(self.lines)):
@@ -106,6 +109,10 @@ class Data:
         self.organized_stripped_data = self.organized_data[:, range(28)]
 
     def calculations(self):
+        """
+        This function calculates the forces acting on each tube. This will be calculated with the known tube area and
+        known stress.
+        """
         a_rear_tube = float(A_rear_tube)
         a_chai_tube = float(A_chai_tube)
         a_sitt_tube = float(A_sitt_tube)
@@ -127,6 +134,12 @@ class Data:
                                                                      * a_fron_tube]], axis=0)
 
     def counting(self):
+        """
+        This function will be used to count the force peaks acting on the bicycle. These peaks will determine if the
+        bike will fatigue. These values will be shown in box plots and compared between the different situations. The
+        bike frames will fatigue the same on indoor trainers as training outdoor if these graphs match. If not, further
+        research is required.
+        """
         max_force_columns = []
         min_force_columns = []
         for i in range(len(self.internal_forces)):
@@ -156,6 +169,11 @@ class Data:
             counts[j, i].append(sum_peaks[j, i])
 
     def plotting(self):
+        """
+        Plots both graphs:
+            - The first graph will show the force over time in the bicycle frame.
+            - The second graph will show the box plot of the force peaks.
+        """
         horizontal_axis_internal_forces = self.organized_stripped_data[:, 0]
         vertical_axis_internal_forces = [self.internal_forces[:, 0], self.internal_forces[:, 1],
                                          self.internal_forces[:, 2], self.internal_forces[:, 3],
