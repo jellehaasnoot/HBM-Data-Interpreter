@@ -157,6 +157,8 @@ class Data:
         sum_per_range = [[]]
         sum_per_column = []
 
+        # Work between here
+
         for i in range(len(self.internal_forces)):
             for k in range(len(self.internal_forces[i])):
                 sum_peaks = 0
@@ -171,6 +173,7 @@ class Data:
 
         print(sum_per_column)
 
+        # And here
 
     def plotting(self):
         """
