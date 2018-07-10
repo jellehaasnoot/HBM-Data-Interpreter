@@ -177,8 +177,21 @@ class Data:
                 sum_per_column.append(sum_per_range)
                 # print(sum_per_column)
             total_sums.append(sum_per_column)
+            np.array(total_sums)
+
         print(total_sums)
         print(len(total_sums))
+        print(len(self.internal_forces))
+        print(type(total_sums))
+
+        self.total_counts_per_strain_gauge = []
+        total_counts_per_column = []
+
+        for i in range(len(total_sums)):
+            for j in range(len(total_sums[i])):
+                total_counts_per_column[i].append(total_sums[i , j])
+
+        print(self.total_counts_per_strain_gauge)
 
         # And here
 
@@ -220,7 +233,7 @@ class Data:
 
 
 # Plot settings
-np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
+np.set_printoptions(linewidth=40, edgeitems=18, suppress=True)
 
 
 # Classes
