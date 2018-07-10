@@ -82,7 +82,7 @@ class Data:
         for line in new_text_file:
             self.lines.append(line)
 
-        for i in range(38):
+        for i in range(1):
             del self.lines[0]
 
         self.opened_file.close()
@@ -201,7 +201,7 @@ class Data:
         plt.figure(1, figsize=(20, 13))
         for j in range(5):
             plt.subplot(5, 1, j + 1)
-            plt.bar(bar_horizontal_axis, bar_vertical_axis[j], 10, align='center')
+            plt.bar(bar_horizontal_axis, bar_vertical_axis[j], 0.8, align='center')
             plt.grid(True)
             plt.title(plot_title[j])
             plt.xticks(bar_horizontal_ticks)
