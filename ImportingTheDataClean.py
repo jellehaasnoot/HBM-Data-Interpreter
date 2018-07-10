@@ -153,43 +153,60 @@ class Data:
 
         force_ranges = []
         outer_range = max_force - min_force
-        for i in range(int(round(outer_range/20, 1))):
-            force_ranges.append(min_force + i*20)
-        # print(len(force_ranges))
+        for i in range(int(round(outer_range/200, 1))):
+            force_ranges.append(min_force + i*200)
         total_sums = []
 
         # Work between here
 
-        for i in range(len(self.internal_forces)):
-            sum_per_column = []
-            for j in range(len(force_ranges) - 1):
-                sum_per_range = []
-                sum_peaks = 0
+        for j in range(len(force_ranges)-1):
+            sum_per_peak_in_range = []
+
+            for i in range(len(self.internal_forces)):
+                sum_per_peak = 0
+
                 for k in range(len(self.internal_forces[i])):
-                    # sum_peaks = 0
                     if force_ranges[j] < self.internal_forces[i, k] < force_ranges[j + 1]:
-                        sum_peaks += 1
-                        # print(sum_peaks)
+                        sum_per_peak += 1
+
                     else:
-                        pass
-                    sum_per_range.append(sum_peaks)
-                    # print(sum_per_range)
-                sum_per_column.append(sum_per_range)
-                # print(sum_per_column)
+                        continue
+
+                sum_per_peak_in_range.append(sum_per_peak)
+
+            total_sums.append(sum_per_peak_in_range)
+
+
+
+        for i in range(len(self.internal_forces)):
+            sum_per_column = []                 # Elke keer als er naar de volgende kolom van data wordt gegaan, vorige lijst legen
+
+            for j in range(len(force_ranges) - 1):
+                sum_per_peak_in_range = []               # Elke keer als er naar de volgende set grenzen wordt gegaan, optelling van de vorige set legen.
+
+                for k in range(len(self.internal_forces[i])):
+
+                    if force_ranges[j] < self.internal_forces[i, k] < force_ranges[j + 1]:
+                        sum_per_peak_in_range.append(1)
+                        print(sum_per_peak_in_range)
+                    else:
+                        continue
+
+                sum_per_column.append(sum(sum_per_peak_in_range))
+                print(len(sum_per_column))
+
             total_sums.append(sum_per_column)
-            np.array(total_sums)
 
         print(total_sums)
         print(len(total_sums))
-        print(len(self.internal_forces))
-        print(type(total_sums))
+        print(len(total_sums[1]))
 
         self.total_counts_per_strain_gauge = []
         total_counts_per_column = []
 
         for i in range(len(total_sums)):
             for j in range(len(total_sums[i])):
-                total_counts_per_column[i].append(total_sums[i , j])
+                total_counts_per_column[i].append(total_sums[i][j])
 
         print(self.total_counts_per_strain_gauge)
 
