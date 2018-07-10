@@ -155,26 +155,28 @@ class Data:
         force_ranges = []
         outer_range = max_force - min_force
         for i in range(int(round(outer_range/1, 1))):
-            force_ranges.append(min_force + i*0.5)
+            force_ranges.append(min_force + i)
 
-        sum_per_range = [[]]
         sum_per_column = []
+        total_sums = []
 
         # Work between here
 
         for i in range(len(self.internal_forces)):
-            for k in range(len(self.internal_forces[i])):
+            sum_per_range = []
+            for j in range(len(force_ranges) - 1):
                 sum_peaks = 0
-                for j in range(len(force_ranges) - 1):
+                for k in range(len(self.internal_forces[i])):
                     if force_ranges[j] < self.internal_forces[i, k] < force_ranges[j + 1]:
                         sum_peaks += 1
-                        # print(sum_peaks)
+                        print(sum_peaks)
                     else:
                         sum_per_range.append(sum_peaks)
                         pass
             sum_per_column.append(sum_per_range)
+        total_sums.append(sum_per_column)
 
-        print(sum_per_column)
+        print(str(total_sums))
 
         # And here
 
