@@ -145,48 +145,35 @@ class Data:
         max_force_columns = []
         min_force_columns = []
         for i in range(len(self.internal_forces)):
-            max_force_columns.append(max(self.internal_forces[i]))
-            min_force_columns.append(min(self.internal_forces[i]))
+            max_force_columns.append(abs(max(self.internal_forces[i])))
+            min_force_columns.append(abs(min(self.internal_forces[i])))
 
         max_force = max(max_force_columns)
         min_force = min(min_force_columns)
 
-        force_ranges = []
+        self.force_ranges = []
         outer_range = max_force - min_force
-        for i in range(int(round(outer_range/200, 1))):
-            force_ranges.append(min_force + i*200)
+        for i in range(int(round(outer_range/1, 1))):
+            self.force_ranges.append(min_force + i*1)
 
-        # Work between here
-
-
-        sum_of_peaks_in_range_all_columns = []
-        for j in range(len(force_ranges)-1):
+        self.sum_of_peaks_in_range_all_columns = []
+        for j in range(len(self.force_ranges) - 1):
             sum_of_peaks_in_range_one_column = []
 
             for i in range(len(self.internal_forces[1])):
                 counter = 0
-                
+
                 for k in range(len(self.internal_forces)):
-                    if force_ranges[j] < self.internal_forces[k, i] < force_ranges[j + 1]:
+                    if self.force_ranges[j] < self.internal_forces[k, i] < self.force_ranges[j + 1]:
                         counter += 1
 
                 sum_of_peaks_in_range_one_column.append(counter)
-            sum_of_peaks_in_range_all_columns.append(sum_of_peaks_in_range_one_column)
-            print(sum_of_peaks_in_range_all_columns)
+            self.sum_of_peaks_in_range_all_columns.append(sum_of_peaks_in_range_one_column)
 
-        print(len(self.internal_forces))
-
-
-        # self.total_counts_per_strain_gauge = []
-        # total_counts_per_column = []
-        #
-        # for i in range(len(total_sums)):
-        #     for j in range(len(total_sums[i])):
-        #         total_counts_per_column[i].append(total_sums[i][j])
-        #
-        # print(self.total_counts_per_strain_gauge)
-
-        # And here
+        self.sum_of_peaks_in_all_ranges = [[], [], [], [], []]
+        for i in range(len(self.sum_of_peaks_in_range_all_columns)):
+            for j in range(len(self.sum_of_peaks_in_range_all_columns[i])):
+                self.sum_of_peaks_in_all_ranges[j].append(self.sum_of_peaks_in_range_all_columns[i][j])
 
     def plotting(self):
         """
@@ -199,34 +186,42 @@ class Data:
                                          self.internal_forces[:, 2], self.internal_forces[:, 3],
                                          self.internal_forces[:, 4]]
 
-        horizontal_axis_internal_forces_maxima = [1, 2]
-        vertical_axis_internal_forces_maxima = [10, 20]
+        del self.force_ranges[-1]
+        bar_horizontal_axis = tuple(self.force_ranges)
+        bar_vertical_axis = self.sum_of_peaks_in_all_ranges
+
+        bar_horizontal_ticks = []
+        for i in range((int(round(max(self.force_ranges)/100, 1)))):
+            bar_horizontal_ticks.append(self.force_ranges[i * 100])
 
         plot_title = ['Internal Force Rear-most Tube, [N]', 'Internal Force Tube Parallel To Chain, [N]',
                       'Internal Force Sitting Tube, [N]', 'Internal Force Horizontal Tube, [N]',
                       'Internal Force Front Angled Tube, [N]']
+
         plt.figure(1, figsize=(20, 13))
+        for j in range(5):
+            plt.subplot(5, 1, j + 1)
+            plt.bar(bar_horizontal_axis, bar_vertical_axis[j], 10, align='center')
+            plt.grid(True)
+            plt.title(plot_title[j])
+            plt.xticks(bar_horizontal_ticks)
+            plt.xlabel('Interne Krachten [N]')
+            plt.tight_layout()
+
+        plt.figure(2, figsize=(20, 13))
         for i in range(5):
             plt.subplot(5, 1, i + 1)
             plt.scatter(horizontal_axis_internal_forces, vertical_axis_internal_forces[i], s=1, marker=',')
             plt.grid(True)
             plt.title(plot_title[i])
             plt.xticks([])
-        plt.tight_layout()
-
-        plt.figure(2, figsize=(20, 13))
-        for i in range(5):
-            plt.subplot(5, 1, i + 1)
-            plt.bar(horizontal_axis_internal_forces_maxima, vertical_axis_internal_forces_maxima, color='b')
-            plt.grid(True)
-            plt.title(plot_title[i])
-            plt.xticks([])
-        plt.tight_layout()
-        # plt.show()
+            plt.xlabel('Tijd [s]')
+            plt.tight_layout()
+        plt.show()
 
 
 # Plot settings
-np.set_printoptions(linewidth=40, edgeitems=18, suppress=True)
+np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
 
 
 # Classes
