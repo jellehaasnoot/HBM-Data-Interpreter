@@ -82,7 +82,7 @@ class Data:
         for line in new_text_file:
             self.lines.append(line)
 
-        for i in range(1):
+        for i in range(38):
             del self.lines[0]
 
         self.opened_file.close()
@@ -205,7 +205,7 @@ class Data:
             plt.grid(True)
             plt.title(plot_title[j])
             plt.xticks(bar_horizontal_ticks)
-            plt.xlabel('Interne Krachten [N]')
+            plt.xlabel('Interne Krachten (Absolute waarden) [N]')
             plt.tight_layout()
 
         plt.figure(2, figsize=(20, 13))
