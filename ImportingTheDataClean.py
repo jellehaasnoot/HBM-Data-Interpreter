@@ -88,6 +88,7 @@ class Data:
         self.opened_file.close()
         new_text_file.close()
 
+
     def organizing(self):
         """
         This function is used to organize the input data which is given in the loaded text file.
@@ -107,6 +108,7 @@ class Data:
             self.organized_data[:, values_to_convert[i]] = self.organized_data[:, values_to_convert[i][::-1]]
 
         self.organized_stripped_data = self.organized_data[:, range(28)]
+
 
     def calculations(self):
         """
@@ -132,6 +134,7 @@ class Data:
                                                                      * a_horz_tube,
                                                                      float(self.organized_stripped_data[i, 20])
                                                                      * a_fron_tube]], axis=0)
+
 
     def counting(self):
         """
@@ -214,11 +217,16 @@ class Data:
 # Plot settings
 np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
 
+
 # Classes
 data = Data()
 
 # Functions
 data.organizing()
+print('gelukt')
 data.calculations()
+print('gelukt')
 data.counting()
+print('gelukt')
 data.plotting()
+print('gelukt')
