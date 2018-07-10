@@ -155,60 +155,36 @@ class Data:
         outer_range = max_force - min_force
         for i in range(int(round(outer_range/200, 1))):
             force_ranges.append(min_force + i*200)
-        total_sums = []
 
         # Work between here
 
+
+        sum_of_peaks_in_range_all_columns = []
         for j in range(len(force_ranges)-1):
-            sum_per_peak_in_range = []
+            sum_of_peaks_in_range_one_column = []
 
-            for i in range(len(self.internal_forces)):
-                sum_per_peak = 0
+            for i in range(len(self.internal_forces[1])):
+                counter = 0
+                
+                for k in range(len(self.internal_forces)):
+                    if force_ranges[j] < self.internal_forces[k, i] < force_ranges[j + 1]:
+                        counter += 1
 
-                for k in range(len(self.internal_forces[i])):
-                    if force_ranges[j] < self.internal_forces[i, k] < force_ranges[j + 1]:
-                        sum_per_peak += 1
+                sum_of_peaks_in_range_one_column.append(counter)
+            sum_of_peaks_in_range_all_columns.append(sum_of_peaks_in_range_one_column)
+            print(sum_of_peaks_in_range_all_columns)
 
-                    else:
-                        continue
-
-                sum_per_peak_in_range.append(sum_per_peak)
-
-            total_sums.append(sum_per_peak_in_range)
-
+        print(len(self.internal_forces))
 
 
-        for i in range(len(self.internal_forces)):
-            sum_per_column = []                 # Elke keer als er naar de volgende kolom van data wordt gegaan, vorige lijst legen
-
-            for j in range(len(force_ranges) - 1):
-                sum_per_peak_in_range = []               # Elke keer als er naar de volgende set grenzen wordt gegaan, optelling van de vorige set legen.
-
-                for k in range(len(self.internal_forces[i])):
-
-                    if force_ranges[j] < self.internal_forces[i, k] < force_ranges[j + 1]:
-                        sum_per_peak_in_range.append(1)
-                        print(sum_per_peak_in_range)
-                    else:
-                        continue
-
-                sum_per_column.append(sum(sum_per_peak_in_range))
-                print(len(sum_per_column))
-
-            total_sums.append(sum_per_column)
-
-        print(total_sums)
-        print(len(total_sums))
-        print(len(total_sums[1]))
-
-        self.total_counts_per_strain_gauge = []
-        total_counts_per_column = []
-
-        for i in range(len(total_sums)):
-            for j in range(len(total_sums[i])):
-                total_counts_per_column[i].append(total_sums[i][j])
-
-        print(self.total_counts_per_strain_gauge)
+        # self.total_counts_per_strain_gauge = []
+        # total_counts_per_column = []
+        #
+        # for i in range(len(total_sums)):
+        #     for j in range(len(total_sums[i])):
+        #         total_counts_per_column[i].append(total_sums[i][j])
+        #
+        # print(self.total_counts_per_strain_gauge)
 
         # And here
 
