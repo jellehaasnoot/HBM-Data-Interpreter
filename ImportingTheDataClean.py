@@ -135,7 +135,6 @@ class Data:
                                                                      float(self.organized_stripped_data[i, 20])
                                                                      * a_fron_tube]], axis=0)
 
-
     def counting(self):
         """
         This function will be used to count the force peaks acting on the bicycle. These peaks will determine if the
@@ -154,29 +153,32 @@ class Data:
 
         force_ranges = []
         outer_range = max_force - min_force
-        for i in range(int(round(outer_range/1, 1))):
-            force_ranges.append(min_force + i)
-
-        sum_per_column = []
+        for i in range(int(round(outer_range/20, 1))):
+            force_ranges.append(min_force + i*20)
+        # print(len(force_ranges))
         total_sums = []
 
         # Work between here
 
         for i in range(len(self.internal_forces)):
-            sum_per_range = []
+            sum_per_column = []
             for j in range(len(force_ranges) - 1):
+                sum_per_range = []
                 sum_peaks = 0
                 for k in range(len(self.internal_forces[i])):
+                    # sum_peaks = 0
                     if force_ranges[j] < self.internal_forces[i, k] < force_ranges[j + 1]:
                         sum_peaks += 1
-                        print(sum_peaks)
+                        # print(sum_peaks)
                     else:
-                        sum_per_range.append(sum_peaks)
                         pass
-            sum_per_column.append(sum_per_range)
-        total_sums.append(sum_per_column)
-
-        print(str(total_sums))
+                    sum_per_range.append(sum_peaks)
+                    # print(sum_per_range)
+                sum_per_column.append(sum_per_range)
+                # print(sum_per_column)
+            total_sums.append(sum_per_column)
+        print(total_sums)
+        print(len(total_sums))
 
         # And here
 
@@ -216,6 +218,7 @@ class Data:
         plt.tight_layout()
         # plt.show()
 
+
 # Plot settings
 np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
 
@@ -225,10 +228,6 @@ data = Data()
 
 # Functions
 data.organizing()
-print('gelukt')
 data.calculations()
-print('gelukt')
 data.counting()
-print('gelukt')
 data.plotting()
-print('gelukt')
