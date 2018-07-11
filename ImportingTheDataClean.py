@@ -74,60 +74,77 @@ class Data:
                                                       filetypes=(("ASC Files", "*.asc"), ("Text Files", "*.txt"),
                                                                  ("All Files", "*.*")))
         self.opened_file_1 = open(self.file_name_1, 'r')
-        self.read_file_1 = self.opened_file_1.read()
+        self.read_file_1 = self.opened_file_1.readlines()
 
-        path_directory = str(os.path.dirname(self.file_name_1))
-        path_file_1 = os.path.join(path_directory, "Intermediate_Text_File_1.txt")
-        if os.path.exists(path_file_1):
-            os.remove('Intermediate_Text_File_1.txt')
-        else:
-            pass
-        new_text_file_1 = open('Intermediate_Text_File_1.txt', 'w')
-
-        for line in self.read_file_1:
-            new_text_file_1.write(line)
-
-        new_text_file_1 = open('Intermediate_Text_File_1.txt', 'r')
         self.lines_1 = []
-
-        for line in new_text_file_1:
+        for line in self.read_file_1:
             self.lines_1.append(line)
+
+        # path_directory = str(os.path.dirname(self.file_name_1))
+        # path_file_1 = os.path.join(path_directory, "Intermediate_Text_File_1.txt")
+        # if os.path.exists(path_file_1):
+        #     os.remove('Intermediate_Text_File_1.txt')
+        # else:
+        #     pass
+        # new_text_file_1 = open('Intermediate_Text_File_1.txt', 'w')
+        #
+        # for line in self.read_file_1:
+        #     new_text_file_1.write(line)
+        #
+        # self.opened_file_1.close()
+        # new_text_file_1.close()
+        #
+        # read_text_file_1 = open('Intermediate_Text_File_1.txt', 'r')
+        # self.lines_1 = []
+        #
+        # for line in read_text_file_1:
+        #     self.lines_1.append(line)
 
         for i in range(38):
             del self.lines_1[0]
-
         self.opened_file_1.close()
-        new_text_file_1.close()
+        # read_text_file_1.close()
 
         #File 2
+        root = tk.Tk()
+        root.withdraw()
+
         self.file_name_2 = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\Documents\GitHub\HBM-Data-Interpreter",
                                                       title="Select second file...",
                                                       filetypes=(("ASC Files", "*.asc"), ("Text Files", "*.txt"),
                                                                  ("All Files", "*.*")))
         self.opened_file_2 = open(self.file_name_2, 'r')
-        self.read_file_2 = self.opened_file_2.read()
+        self.read_file_2 = self.opened_file_2.readlines()
 
-        path_file_2 = os.path.join(path_directory, "Intermediate_Text_File_2.txt")
-        if os.path.isfile(path_file_2):
-            os.remove('Intermediate_Text_File_2.txt')
-        else:
-            pass
-        new_text_file_2 = open('Intermediate_Text_File_2.txt', 'w')
-
-        for line in self.read_file_1:
-            new_text_file_2.write(line)
-
-        new_text_file_2 = open('Intermediate_Text_File_2.txt', 'r')
         self.lines_2 = []
-
-        for line in new_text_file_2:
+        for line in self.read_file_2:
             self.lines_2.append(line)
+
+        # path_file_2 = os.path.join(path_directory, "Intermediate_Text_File_2.txt")
+        # if os.path.isfile(path_file_2):
+        #     os.remove('Intermediate_Text_File_2.txt')
+        # else:
+        #     pass
+        # new_text_file_2 = open('Intermediate_Text_File_2.txt', 'w')
+        #
+        # for line in self.read_file_1:
+        #     new_text_file_2.write(line)
+        #
+        # self.opened_file_2.close()
+        # new_text_file_2.close()
+        #
+        # read_text_file_2 = open('Intermediate_Text_File_2.txt', 'r')
+        # self.lines_2 = []
+        #
+        # for line in read_text_file_2:
+        #     self.lines_2.append(line)
 
         for i in range(38):
             del self.lines_2[0]
 
         self.opened_file_2.close()
-        new_text_file_2.close()
+
+        # read_text_file_2.close()
 
     def user_input(self):
         self.integrated = input('Do you want the two graphs to be viewed as integrated? Type [yes] or [no]: ')
@@ -333,8 +350,12 @@ class Data:
         bar_vertical_axis_1 = self.sum_of_peaks_in_all_ranges_1
 
         bar_horizontal_ticks_1 = []
-        for i in range(int(round((len(self.stress_ranges_2))/4, 1)) - 1):
+        for i in range(int(round((len(self.stress_ranges_2))/4, 1))):
             bar_horizontal_ticks_1.append(self.stress_ranges_1[i*4])
+
+        line_horizontal_ticks_1 = []
+        for i in range(int(round((len(self.organized_stripped_data_1[:, 0]))/1000, 1))):
+            line_horizontal_ticks_1.append(self.organized_stripped_data_1[i * 1000, 0])
 
         # File 2
         del self.stress_ranges_2[-1]
@@ -342,8 +363,12 @@ class Data:
         bar_vertical_axis_2 = self.sum_of_peaks_in_all_ranges_2
 
         bar_horizontal_ticks_2 = []
-        for i in range(int(round((len(self.stress_ranges_2))/4, 1)) - 1):
+        for i in range(int(round((len(self.stress_ranges_2))/4, 1))):
             bar_horizontal_ticks_2.append(self.stress_ranges_2[i*4])
+
+        line_horizontal_ticks_2 = []
+        for i in range(int(round((len(self.organized_stripped_data_2[:, 0]))/1000, 1))):
+            line_horizontal_ticks_2.append(self.organized_stripped_data_2[i * 1000, 0])
 
         plot_title = [self.channel_names[0] + ' [MPa]', self.channel_names[1] + ' [MPa]',
                       self.channel_names[2] + ' [MPa]', self.channel_names[3] + ' [MPa]',
@@ -378,26 +403,26 @@ class Data:
         plt.figure(2, figsize=(20, 13))
         for i in range(5):
             plt.subplot(5, self.integrated, i * self.no_of_subplots + 1)
-            plt.plot(self.organized_stripped_data_1[:, 0], self.internal_stresses_1[:, i], linewidth=0.3,
+            plt.plot(self.organized_stripped_data_1[:, 0], self.internal_stresses_1[:, i], linewidth=0.4,
                      color='k', label=str(os.path.basename(self.file_name_1)))
             plt.minorticks_on()
             plt.grid(b=True, which='major', linestyle='-')
             plt.grid(b=True, which='minor', linestyle='--')
             plt.title(plot_title[i])
-            plt.xticks([])
+            plt.xticks(line_horizontal_ticks_1)
             plt.xlabel('Tijd [s]')
             plt.ylabel('Interne Spanning [MPa]')
             plt.legend()
             plt.tight_layout()
 
             plt.subplot(5, self.integrated, i * self.no_of_subplots + self.integrated)
-            plt.plot(self.organized_stripped_data_2[:, 0], self.internal_stresses_2[:, i], linewidth=0.3,
+            plt.plot(self.organized_stripped_data_2[:, 0], self.internal_stresses_2[:, i], linewidth=0.4,
                      color='r', label=str(os.path.basename(self.file_name_2)))
             plt.minorticks_on()
             plt.grid(b=True, which='major', linestyle='-')
             plt.grid(b=True, which='minor', linestyle='--')
             plt.title(plot_title[i])
-            plt.xticks([])
+            plt.xticks(line_horizontal_ticks_2, color='r')
             plt.xlabel('Tijd [s]')
             plt.ylabel('Interne Spanning [MPa]')
             plt.legend()
