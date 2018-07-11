@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import filedialog
 import os.path
+import warnings
 
 # Constants dimensions
 alpha = 68.7
@@ -123,6 +124,18 @@ class Data:
 
         self.opened_file_2.close()
         new_text_file_2.close()
+
+    def user_input(self):
+        self.integrated = input('Do you want the two graphs to be viewed as integrated? Type [yes] or [no]: ')
+
+        if self.integrated == 'yes' or self.integrated == 'Yes':
+            self.integrated = 1
+            self.no_of_subplots = 1
+        elif self.integrated == 'no' or self.integrated == 'No':
+            self.integrated = 2
+            self.no_of_subplots = 2
+        else:
+            print('That was not a valid input. Please restart the program.')
 
     def organizing(self):
         """
@@ -309,24 +322,53 @@ class Data:
         # Bar plot 1
         plt.figure(1, figsize=(20, 13))
         for j in range(5):
-            plt.subplot(5, 1, j + 1)
-            plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.8, align='edge')
+            plt.subplot(5, self.integrated, j * self.no_of_subplots + 1)
+            plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.8, align='edge', color='k', label=str(os.path.basename(self.file_name_1)))
             plt.grid(True)
             plt.title(plot_title[j])
             plt.xticks(bar_horizontal_ticks_1)
             plt.xlabel('Interne Spanningen [MPa]')
+            plt.ylabel('Aantal instanties')
+            plt.legend()
             plt.tight_layout()
 
-        # Scatter plot
+            plt.subplot(5, self.integrated, j * self.no_of_subplots + self.integrated)
+            plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], 0.8, align='edge', color='r', label=str(os.path.basename(self.file_name_2)))
+            plt.title(plot_title[j])
+            plt.grid(True)
+            plt.xticks(bar_horizontal_ticks_2)
+            plt.xlabel('Interne Spanningen [MPa]')
+            plt.ylabel('Aantal instanties')
+            plt.legend()
+            plt.tight_layout()
+
+        # Normal plot
         plt.figure(2, figsize=(20, 13))
         for i in range(5):
-            plt.subplot(5, 1, i + 1)
-            plt.scatter(horizontal_axis_internal_stresses_1, vertical_axis_internal_stresses_1[i], s=1, marker=',')
-            plt.grid(True)
+            plt.subplot(5, self.integrated, i * self.no_of_subplots + 1)
+            plt.plot(horizontal_axis_internal_stresses_1, vertical_axis_internal_stresses_1[i], linewidth=0.3, color='k', label=str(os.path.basename(self.file_name_1)))
+            plt.minorticks_on()
+            plt.grid(b=True, which='major', linestyle='-')
+            plt.grid(b=True, which='minor', linestyle='--')
             plt.title(plot_title[i])
             plt.xticks([])
             plt.xlabel('Tijd [s]')
+            plt.ylabel('Interne Spanning [MPa]')
+            plt.legend()
             plt.tight_layout()
+
+            plt.subplot(5, self.integrated, i * self.no_of_subplots + self.integrated)
+            plt.plot(horizontal_axis_internal_stresses_2, vertical_axis_internal_stresses_2[i], linewidth=0.3, color='r', label=str(os.path.basename(self.file_name_2)))
+            plt.minorticks_on()
+            plt.grid(b=True, which='major', linestyle='-')
+            plt.grid(b=True, which='minor', linestyle='--')
+            plt.title(plot_title[i])
+            plt.xticks([])
+            plt.xlabel('Tijd [s]')
+            plt.ylabel('Interne Spanning [MPa]')
+            plt.legend()
+            plt.tight_layout()
+
         plt.show()
 
 
@@ -337,6 +379,8 @@ np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
 data = Data()
 
 # Functions
+warnings.filterwarnings("ignore")
+data.user_input()
 data.organizing()
 data.calculations()
 data.counting()
