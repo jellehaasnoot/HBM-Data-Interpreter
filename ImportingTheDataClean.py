@@ -69,10 +69,11 @@ class Data:
         root.withdraw()
 
         # File 1
-        self.file_name_1 = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\Documents\GitHub\HBM-Data-Interpreter",
-                                                      title="Select first file...",
-                                                      filetypes=(("ASC Files", "*.asc"), ("Text Files", "*.txt"),
-                                                                 ("All Files", "*.*")))
+        self.file_name_1 = filedialog.askopenfilename(
+            initialdir="C:\\Users\Jelle\Documents\GitHub\HBM-Data-Interpreter",
+            title="Select first file...",
+            filetypes=(("ASC Files", "*.asc"), ("Text Files", "*.txt"),
+                       ("All Files", "*.*")))
         self.opened_file_1 = open(self.file_name_1, 'r')
         self.read_file_1 = self.opened_file_1.readlines()
 
@@ -80,39 +81,19 @@ class Data:
         for line in self.read_file_1:
             self.lines_1.append(line)
 
-        # path_directory = str(os.path.dirname(self.file_name_1))
-        # path_file_1 = os.path.join(path_directory, "Intermediate_Text_File_1.txt")
-        # if os.path.exists(path_file_1):
-        #     os.remove('Intermediate_Text_File_1.txt')
-        # else:
-        #     pass
-        # new_text_file_1 = open('Intermediate_Text_File_1.txt', 'w')
-        #
-        # for line in self.read_file_1:
-        #     new_text_file_1.write(line)
-        #
-        # self.opened_file_1.close()
-        # new_text_file_1.close()
-        #
-        # read_text_file_1 = open('Intermediate_Text_File_1.txt', 'r')
-        # self.lines_1 = []
-        #
-        # for line in read_text_file_1:
-        #     self.lines_1.append(line)
-
         for i in range(38):
             del self.lines_1[0]
         self.opened_file_1.close()
-        # read_text_file_1.close()
 
-        #File 2
+        # File 2
         root = tk.Tk()
         root.withdraw()
 
-        self.file_name_2 = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\Documents\GitHub\HBM-Data-Interpreter",
-                                                      title="Select second file...",
-                                                      filetypes=(("ASC Files", "*.asc"), ("Text Files", "*.txt"),
-                                                                 ("All Files", "*.*")))
+        self.file_name_2 = filedialog.askopenfilename(
+            initialdir="C:\\Users\Jelle\Documents\GitHub\HBM-Data-Interpreter",
+            title="Select second file...",
+            filetypes=(("ASC Files", "*.asc"), ("Text Files", "*.txt"),
+                       ("All Files", "*.*")))
         self.opened_file_2 = open(self.file_name_2, 'r')
         self.read_file_2 = self.opened_file_2.readlines()
 
@@ -120,31 +101,10 @@ class Data:
         for line in self.read_file_2:
             self.lines_2.append(line)
 
-        # path_file_2 = os.path.join(path_directory, "Intermediate_Text_File_2.txt")
-        # if os.path.isfile(path_file_2):
-        #     os.remove('Intermediate_Text_File_2.txt')
-        # else:
-        #     pass
-        # new_text_file_2 = open('Intermediate_Text_File_2.txt', 'w')
-        #
-        # for line in self.read_file_1:
-        #     new_text_file_2.write(line)
-        #
-        # self.opened_file_2.close()
-        # new_text_file_2.close()
-        #
-        # read_text_file_2 = open('Intermediate_Text_File_2.txt', 'r')
-        # self.lines_2 = []
-        #
-        # for line in read_text_file_2:
-        #     self.lines_2.append(line)
-
         for i in range(38):
             del self.lines_2[0]
 
         self.opened_file_2.close()
-
-        # read_text_file_2.close()
 
     def user_input(self):
         self.integrated = input('Do you want the two graphs to be viewed as integrated? Type [yes] or [no]: ')
@@ -184,7 +144,8 @@ class Data:
         else:
             pass
 
-        self.amount_of_ranges = input('In how many parts should the data be divided? In other words, how many ranges should be visible? Type a number: ')
+        self.amount_of_ranges = input(
+            'In how many parts should the data be divided? In other words, how many ranges should be visible? Type a number: ')
         if int(self.amount_of_ranges) <= 0:
             print('This is not a valid input. Please restart the program.')
             sys.exit()
@@ -230,15 +191,20 @@ class Data:
         for i in range(len(self.organized_stripped_data_1)):
             self.internal_stresses_1 = np.append(self.internal_stresses_1,
                                                  [[float(self.youngs_modulus) * float(
-                                                     self.organized_stripped_data_1[i][int(self.channels[0])])/1000000,
+                                                     self.organized_stripped_data_1[i][
+                                                         int(self.channels[0])]) / 1000000,
                                                    float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_1[i][int(self.channels[1])])/1000000,
+                                                       self.organized_stripped_data_1[i][
+                                                           int(self.channels[1])]) / 1000000,
                                                    float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_1[i][int(self.channels[2])])/1000000,
+                                                       self.organized_stripped_data_1[i][
+                                                           int(self.channels[2])]) / 1000000,
                                                    float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_1[i][int(self.channels[3])])/1000000,
+                                                       self.organized_stripped_data_1[i][
+                                                           int(self.channels[3])]) / 1000000,
                                                    float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_1[i][int(self.channels[4])])/1000000]],
+                                                       self.organized_stripped_data_1[i][
+                                                           int(self.channels[4])]) / 1000000]],
                                                  axis=0)
 
         # File 2
@@ -246,15 +212,20 @@ class Data:
         for i in range(len(self.organized_stripped_data_2)):
             self.internal_stresses_2 = np.append(self.internal_stresses_2,
                                                  [[float(self.youngs_modulus) * float(
-                                                     self.organized_stripped_data_2[i][int(self.channels[0])])/1000000,
+                                                     self.organized_stripped_data_2[i][
+                                                         int(self.channels[0])]) / 1000000,
                                                    float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_2[i][int(self.channels[1])])/1000000,
+                                                       self.organized_stripped_data_2[i][
+                                                           int(self.channels[1])]) / 1000000,
                                                    float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_2[i][int(self.channels[2])])/1000000,
+                                                       self.organized_stripped_data_2[i][
+                                                           int(self.channels[2])]) / 1000000,
                                                    float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_2[i][int(self.channels[3])])/1000000,
+                                                       self.organized_stripped_data_2[i][
+                                                           int(self.channels[3])]) / 1000000,
                                                    float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_2[i][int(self.channels[4])])/1000000]],
+                                                       self.organized_stripped_data_2[i][
+                                                           int(self.channels[4])]) / 1000000]],
                                                  axis=0)
 
     def counting(self):
@@ -277,8 +248,8 @@ class Data:
 
         self.stress_ranges_1 = []
         self.outer_range_1 = max_stress_1 - min_stress_1
-        self.range_factor_1 = int(round(self.outer_range_1/int(self.amount_of_ranges), 1))
-        for i in range(int(round(self.outer_range_1/self.range_factor_1, 1))-1):
+        self.range_factor_1 = int(round(self.outer_range_1 / int(self.amount_of_ranges), 1))
+        for i in range(int(round(self.outer_range_1 / self.range_factor_1, 1)) - 1):
             self.stress_ranges_1.append(min_stress_1 + self.range_factor_1 * i)
 
         # Defining the counter of datapoints. When a certain datapoint falls between two of the above defined ranges, it is counted as being in that range.
@@ -314,8 +285,8 @@ class Data:
 
         self.stress_ranges_2 = []
         self.outer_range_2 = max_stress_2 - min_stress_2
-        self.range_factor_2 = int(round(self.outer_range_1/int(self.amount_of_ranges), 1))
-        for i in range(int(round(self.outer_range_2/self.range_factor_2, 1))-1):
+        self.range_factor_2 = int(round(self.outer_range_1 / int(self.amount_of_ranges), 1))
+        for i in range(int(round(self.outer_range_2 / self.range_factor_2, 1)) - 1):
             self.stress_ranges_2.append(min_stress_2 + self.range_factor_2 * i)
 
         # Defining the counter of datapoints. When a certain datapoint falls between two of the above defined ranges, it is counted as being in that range.
@@ -350,11 +321,11 @@ class Data:
         bar_vertical_axis_1 = self.sum_of_peaks_in_all_ranges_1
 
         bar_horizontal_ticks_1 = []
-        for i in range(int(round((len(self.stress_ranges_2))/4, 1))):
-            bar_horizontal_ticks_1.append(self.stress_ranges_1[i*4])
+        for i in range(int(round((len(self.stress_ranges_2)) / 4, 1))):
+            bar_horizontal_ticks_1.append(self.stress_ranges_1[i * 4])
 
         line_horizontal_ticks_1 = []
-        for i in range(int(round((len(self.organized_stripped_data_1[:, 0]))/1000, 1))):
+        for i in range(int(round((len(self.organized_stripped_data_1[:, 0])) / 1000, 1))):
             line_horizontal_ticks_1.append(self.organized_stripped_data_1[i * 1000, 0])
 
         # File 2
@@ -363,11 +334,11 @@ class Data:
         bar_vertical_axis_2 = self.sum_of_peaks_in_all_ranges_2
 
         bar_horizontal_ticks_2 = []
-        for i in range(int(round((len(self.stress_ranges_2))/4, 1))):
-            bar_horizontal_ticks_2.append(self.stress_ranges_2[i*4])
+        for i in range(int(round((len(self.stress_ranges_2)) / 4, 1))):
+            bar_horizontal_ticks_2.append(self.stress_ranges_2[i * 4])
 
         line_horizontal_ticks_2 = []
-        for i in range(int(round((len(self.organized_stripped_data_2[:, 0]))/1000, 1))):
+        for i in range(int(round((len(self.organized_stripped_data_2[:, 0])) / 1000, 1))):
             line_horizontal_ticks_2.append(self.organized_stripped_data_2[i * 1000, 0])
 
         plot_title = [self.channel_names[0] + ' [MPa]', self.channel_names[1] + ' [MPa]',
