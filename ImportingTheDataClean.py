@@ -67,6 +67,8 @@ class Data:
     def __init__(self):
         root = tk.Tk()
         root.withdraw()
+
+        # File 1
         self.file_name_1 = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\Documents\GitHub\HBM-Data-Interpreter",
                                                       title="Select first file...",
                                                       filetypes=(("ASC Files", "*.asc"), ("Text Files", "*.txt"),
@@ -97,6 +99,7 @@ class Data:
         self.opened_file_1.close()
         new_text_file_1.close()
 
+        #File 2
         self.file_name_2 = filedialog.askopenfilename(initialdir="C:\\Users\Jelle\Documents\GitHub\HBM-Data-Interpreter",
                                                       title="Select second file...",
                                                       filetypes=(("ASC Files", "*.asc"), ("Text Files", "*.txt"),
@@ -184,60 +187,29 @@ class Data:
         """
         This function is used to organize the input data which is given in the loaded text file.
         """
+        # File 1
         organized_as_single_columns_1 = []
-
         for i in range(len(self.lines_1)):
             organized_as_single_columns_1.append(self.lines_1[i].split())
 
         self.organized_stripped_data_1 = [[float(float(j)) for j in i] for i in organized_as_single_columns_1]
         self.organized_stripped_data_1 = np.array(self.organized_stripped_data_1)
 
-        # self.organized_data_1 = np.array([np.array(j) for j in organized_as_single_columns_1])
-        #
-        # values_to_convert_1 = [[9, 1], [10, 2], [11, 3], [6, 4], [7, 5], [8, 6], [12, 7], [13, 8], [14, 9], [15, 10],
-        #                        [5, 11], [4, 12], [24, 13], [25, 14], [26, 15], [21, 16], [22, 17], [23, 18], [27, 19],
-        #                        [28, 20], [29, 21], [30, 22], [20, 23], [19, 24], [34, 25], [35, 26], [36, 27]]
-        #
-        # for i in range(len(values_to_convert_1)):
-        #     self.organized_data_1[:, values_to_convert_1[i]] = self.organized_data_1[:, values_to_convert_1[i][::-1]]
-        #
-        # self.organized_stripped_data_1 = self.organized_data_1[:, range(28)]
-
+        # File 2
         organized_as_single_columns_2 = []
-
         for i in range(len(self.lines_2)):
             organized_as_single_columns_2.append(self.lines_2[i].split())
 
         self.organized_stripped_data_2 = [[float(float(j)) for j in i] for i in organized_as_single_columns_2]
         self.organized_stripped_data_2 = np.array(self.organized_stripped_data_2)
-        # self.organized_data_2 = np.array([np.array(j) for j in organized_as_single_columns_2])
-        #
-        # values_to_convert_2 = [[9, 1], [10, 2], [11, 3], [6, 4], [7, 5], [8, 6], [12, 7], [13, 8], [14, 9], [15, 10],
-        #                        [5, 11], [4, 12], [24, 13], [25, 14], [26, 15], [21, 16], [22, 17], [23, 18], [27, 19],
-        #                        [28, 20], [29, 21], [30, 22], [20, 23], [19, 24], [34, 25], [35, 26], [36, 27]]
-        #
-        # for i in range(len(values_to_convert_2)):
-        #     self.organized_data_2[:, values_to_convert_2[i]] = self.organized_data_2[:, values_to_convert_2[i][::-1]]
-        #
-        # self.organized_stripped_data_2 = self.organized_data_2[:, range(28)]
 
     def calculations(self):
         """
         This function calculates the stresses acting on each tube. This will be calculated with the known tube area and
         known stress.
         """
-
-        # dictionary_for_channels = dict(
-        #     [(9, 1), (10, 2), (11, 3), (6, 4), (7, 5), (8, 6), (12, 7), (13, 8), (14, 9), (15, 10),
-        #      (5, 11), (4, 12), (24, 13), (25, 14), (26, 15), (21, 16), (22, 17), (23, 18), (27, 19),
-        #      (28, 20), (29, 21), (30, 22), (20, 23), (19, 24), (34, 25), (35, 26), (36, 27)])
-        #
-        # translated_channels = []
-        # for i in range(len(self.channels)):
-        #     translated_channels.append(dictionary_for_channels[int(self.channels[i])])
-
+        # File 1
         self.internal_stresses_1 = np.array([]).reshape(0, 5)
-
         for i in range(len(self.organized_stripped_data_1)):
             self.internal_stresses_1 = np.append(self.internal_stresses_1,
                                                  [[float(self.youngs_modulus) * float(
@@ -252,8 +224,8 @@ class Data:
                                                        self.organized_stripped_data_1[i][int(self.channels[4])])/1000000]],
                                                  axis=0)
 
+        # File 2
         self.internal_stresses_2 = np.array([]).reshape(0, 5)
-
         for i in range(len(self.organized_stripped_data_2)):
             self.internal_stresses_2 = np.append(self.internal_stresses_2,
                                                  [[float(self.youngs_modulus) * float(
@@ -267,7 +239,7 @@ class Data:
                                                    float(self.youngs_modulus) * float(
                                                        self.organized_stripped_data_2[i][int(self.channels[4])])/1000000]],
                                                  axis=0)
-        print(self.internal_stresses_2)
+
     def counting(self):
         """
         This function will be used to count the stress peaks acting on the bicycle. These peaks will determine if the
@@ -275,6 +247,7 @@ class Data:
         bike frames will fatigue the same on indoor trainers as training outdoor if these graphs match. If not, further
         research is required.
         """
+        # File 1
         # Defining the ranges in which the different forces will be categorized.
         max_stress_columns_1 = []
         min_stress_columns_1 = []
@@ -311,6 +284,7 @@ class Data:
             for j in range(len(self.sum_of_peaks_in_range_all_columns_1[i])):
                 self.sum_of_peaks_in_all_ranges_1[j].append(self.sum_of_peaks_in_range_all_columns_1[i][j])
 
+        # File 2
         # Defining the ranges in which the different forces will be categorized.
         max_stress_columns_2 = []
         min_stress_columns_2 = []
@@ -353,22 +327,7 @@ class Data:
             - The first graph will show the stress over time in the bicycle frame.
             - The second graph will show the box plot of the stress peaks.
         """
-        # horizontal_axis_internal_stresses_1 = self.organized_stripped_data_1[:, 0]
-        # vertical_axis_internal_stresses_1 = [self.internal_stresses_1[:][0], self.internal_stresses_1[:][1],
-        #                                      self.internal_stresses_1[:][2], self.internal_stresses_1[:][3],
-        #                                      self.internal_stresses_1[:][4]]
-        #
-        # print(self.internal_stresses_1[0])
-        # print(self.internal_stresses_1[0, 0])
-        # print(self.internal_stresses_1[0][0])
-        # print(self.internal_stresses_1[:, 0])
-        # print(self.internal_stresses_1[0, :])
-        #
-        #
-        # print(horizontal_axis_internal_stresses_1)
-        # print(self.internal_stresses_1)
-        # print(vertical_axis_internal_stresses_1)
-
+        # File 1
         del self.stress_ranges_1[-1]
         bar_horizontal_axis_1 = tuple(self.stress_ranges_1)
         bar_vertical_axis_1 = self.sum_of_peaks_in_all_ranges_1
@@ -377,11 +336,7 @@ class Data:
         for i in range(int(round((len(self.stress_ranges_2))/4, 1)) - 1):
             bar_horizontal_ticks_1.append(self.stress_ranges_1[i*4])
 
-        # horizontal_axis_internal_stresses_2 = self.organized_stripped_data_2[:][0]
-        # vertical_axis_internal_stresses_2 = [self.internal_stresses_2[:][0], self.internal_stresses_2[:][1],
-        #                                      self.internal_stresses_2[:][2], self.internal_stresses_2[:][3],
-        #                                      self.internal_stresses_2[:][4]]
-
+        # File 2
         del self.stress_ranges_2[-1]
         bar_horizontal_axis_2 = tuple(self.stress_ranges_2)
         bar_vertical_axis_2 = self.sum_of_peaks_in_all_ranges_2
