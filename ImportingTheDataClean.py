@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import filedialog
 import os.path
 import warnings
+import sys
 
 # Constants dimensions
 alpha = 68.7
@@ -136,17 +137,35 @@ class Data:
             self.no_of_subplots = 2
         else:
             print('That was not a valid input. Please restart the program.')
+            sys.exit()
+
+        self.channels = input('Which channels do you want to display in the graphs? Type max. 5 numbers, all below or equal to 16, separated by spaces: ')
+        self.channels = [x.strip() for x in self.channels.split()]
+        if len(self.channels) != 5:
+            print('That is not a valid entry. Please restart the program.')
+            sys.exit()
+        else:
+            pass
+
+        for entry in range(len(self.channels)):
+            if int(self.channels[entry]) <= 16:
+                continue
+            if int(self.channels[entry]) > 16 or int(self.channels[entry]) < 0:
+                print('That is not an allowed entry. Please restart the program.')
+                sys.exit()
+        print(self.channels)
+
 
     def organizing(self):
         """
         This function is used to organize the input data which is given in the loaded text file.
         """
-        organized_as_signle_columns_1 = []
+        organized_as_single_columns_1 = []
 
         for i in range(len(self.lines_1)):
-            organized_as_signle_columns_1.append(self.lines_1[i].split())
+            organized_as_single_columns_1.append(self.lines_1[i].split())
 
-        self.organized_data_1 = np.array([np.array(j) for j in organized_as_signle_columns_1])
+        self.organized_data_1 = np.array([np.array(j) for j in organized_as_single_columns_1])
 
         values_to_convert_1 = [[9, 1], [10, 2], [11, 3], [6, 4], [7, 5], [8, 6], [12, 7], [13, 8], [14, 9], [15, 10],
                                [5, 11], [4, 12], [24, 13], [25, 14], [26, 15], [21, 16], [22, 17], [23, 18], [27, 19],
@@ -157,12 +176,12 @@ class Data:
 
         self.organized_stripped_data_1 = self.organized_data_1[:, range(28)]
 
-        organized_as_signle_columns_2 = []
+        organized_as_single_columns_2 = []
 
         for i in range(len(self.lines_2)):
-            organized_as_signle_columns_2.append(self.lines_2[i].split())
+            organized_as_single_columns_2.append(self.lines_2[i].split())
 
-        self.organized_data_2 = np.array([np.array(j) for j in organized_as_signle_columns_2])
+        self.organized_data_2 = np.array([np.array(j) for j in organized_as_single_columns_2])
 
         values_to_convert_2 = [[9, 1], [10, 2], [11, 3], [6, 4], [7, 5], [8, 6], [12, 7], [13, 8], [14, 9], [15, 10],
                                [5, 11], [4, 12], [24, 13], [25, 14], [26, 15], [21, 16], [22, 17], [23, 18], [27, 19],
@@ -384,4 +403,4 @@ data.user_input()
 data.organizing()
 data.calculations()
 data.counting()
-data.plotting()
+# data.plotting()
