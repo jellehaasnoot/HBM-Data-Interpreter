@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6b913f9-ccb3-47d5-b775-7a37ee5ab492" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$" beforeDir="false" afterPath="$PROJECT_DIR$" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImportingTheDataClean.py" beforeDir="false" afterPath="$PROJECT_DIR$/ImportingTheDataClean.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +16,8 @@
       <file leaf-file-name="ImportingTheDataClean.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ImportingTheDataClean.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="205" column="16" lean-forward="true" selection-start-line="205" selection-start-column="16" selection-end-line="205" selection-end-column="16" />
+            <state relative-caret-position="690">
+              <caret line="246" column="58" selection-start-line="246" selection-start-column="58" selection-end-line="246" selection-end-column="58" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -366,8 +363,8 @@
     <entry file="file://$PROJECT_DIR$/Intermediate_Text_File_1.txt" />
     <entry file="file://$PROJECT_DIR$/ImportingTheDataClean.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="205" column="16" lean-forward="true" selection-start-line="205" selection-start-column="16" selection-end-line="205" selection-end-column="16" />
+        <state relative-caret-position="690">
+          <caret line="246" column="58" selection-start-line="246" selection-start-column="58" selection-end-line="246" selection-end-column="58" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

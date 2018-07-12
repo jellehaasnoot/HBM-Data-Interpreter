@@ -194,21 +194,24 @@ class Data:
         known stress.
         """
         # File 1
-        self.internal_stresses_1 = [] #np.array([]).reshape(0, int(self.no_of_graphs))
-        print(self.organized_stripped_data_1[:, 0])
+        self.internal_stresses_1 = np.array([]).reshape(0, int(self.no_of_graphs))
         for i in range(int(self.no_of_graphs)):
-            self.internal_stresses_1.append(float(self.youngs_modulus) * self.organized_stripped_data_1[:, int(self.channels[i])] / 1000000)
+            for j in range(len(self.organized_stripped_data_1)):
+                self.internal_stresses_1 = np.append(self.internal_stresses_1,
+                                                 [float(self.youngs_modulus) * float(
+                                                     self.organized_stripped_data_1[j][
+                                                         int(self.channels[i])]) / 1000000],
+                                                 axis=0)
         print(self.internal_stresses_1)
-        print(len(self.internal_stresses_1))
-        print(len(self.internal_stresses_1[0]))
         # File 2
-        self.internal_stresses_2 = [] #np.array([]).reshape(0, int(self.no_of_graphs))
+        self.internal_stresses_2 = np.array([]).reshape(0, int(self.no_of_graphs))
         for i in range(int(self.no_of_graphs)):
             for j in range(len(self.organized_stripped_data_2)):
                 self.internal_stresses_2 = np.append(self.internal_stresses_2,
                                                   [float(self.youngs_modulus) * float(
                                                      self.organized_stripped_data_2[j][
-                                                         int(self.channels[i])]) / 1000000], axis=0)
+                                                         int(self.channels[i])]) / 1000000],
+                                                 axis=0)
 
     def counting(self):
         """
@@ -227,8 +230,7 @@ class Data:
 
         max_stress_1 = max(max_stress_columns_1)
         min_stress_1 = min(min_stress_columns_1)
-        print(max_stress_1)
-        print(min_stress_1)
+
         self.stress_ranges_1 = []
         self.outer_range_1 = max_stress_1 - min_stress_1
         self.range_factor_1 = round(self.outer_range_1 / int(self.amount_of_ranges), 1)
@@ -238,13 +240,10 @@ class Data:
 
         # Defining the counter of datapoints. When a certain datapoint falls between two of the above defined ranges, it is counted as being in that range.
         self.sum_of_peaks_in_range_all_columns_1 = []
-        print(self.internal_stresses_1[0])
-        print(len(self.internal_stresses_1))
-        print(len(self.internal_stresses_1[0]))
         for j in range(len(self.stress_ranges_1) - 1):
             sum_of_peaks_in_range_one_column_1 = []
 
-            for i in range(len(self.internal_stresses_1[0])):
+            for i in range(len(self.internal_stresses_1[1])):
                 counter = 0
 
                 for k in range(len(self.internal_stresses_1)):
