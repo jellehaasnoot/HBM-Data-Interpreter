@@ -119,10 +119,17 @@ class Data:
             print('That was not a valid input. Please restart the program.')
             sys.exit()
 
+        self.no_of_graphs = input('How many graphs do you want to display? Type a number, max. is 5: ')
+        if int(self.no_of_graphs) > 5 or int(self.no_of_graphs) <= 0:
+            print('That is not an option. Please restart the program.')
+            sys.exit()
+        else:
+            pass
+
         self.channels = input(
             'Which channels do you want to display in the graphs? Type max. 5 numbers, all below or equal to 16, separated by spaces: ')
         self.channels = [x.strip() for x in self.channels.split()]
-        if len(self.channels) != 5:
+        if len(self.channels) != int(self.no_of_graphs):
             print('That is not a valid entry. Please restart the program.')
             sys.exit()
         else:
@@ -138,7 +145,7 @@ class Data:
         self.channel_names = input(
             'What do you want to call these channels, in the same order as you gave them above? Give five names, now separated by commas (multiple words possible): ')
         self.channel_names = [x.strip() for x in self.channel_names.split(',')]
-        if len(self.channel_names) != 5:
+        if len(self.channel_names) != int(self.no_of_graphs):
             print('That is not a valid entry. Please restart the program.')
             sys.exit()
         else:
@@ -187,45 +194,23 @@ class Data:
         known stress.
         """
         # File 1
-        self.internal_stresses_1 = np.array([]).reshape(0, 5)
-        for i in range(len(self.organized_stripped_data_1)):
-            self.internal_stresses_1 = np.append(self.internal_stresses_1,
-                                                 [[float(self.youngs_modulus) * float(
-                                                     self.organized_stripped_data_1[i][
-                                                         int(self.channels[0])]) / 1000000,
-                                                   float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_1[i][
-                                                           int(self.channels[1])]) / 1000000,
-                                                   float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_1[i][
-                                                           int(self.channels[2])]) / 1000000,
-                                                   float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_1[i][
-                                                           int(self.channels[3])]) / 1000000,
-                                                   float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_1[i][
-                                                           int(self.channels[4])]) / 1000000]],
+        self.internal_stresses_1 = np.array([]).reshape(0, int(self.no_of_graphs))
+        for i in range(int(self.no_of_graphs)):
+            for j in range(len(self.organized_stripped_data_1)):
+                self.internal_stresses_1 = np.append(self.internal_stresses_1,
+                                                 [float(self.youngs_modulus) * float(
+                                                     self.organized_stripped_data_1[j][
+                                                         int(self.channels[i])]) / 1000000],
                                                  axis=0)
-
+        print(self.internal_stresses_1)
         # File 2
-        self.internal_stresses_2 = np.array([]).reshape(0, 5)
-        for i in range(len(self.organized_stripped_data_2)):
-            self.internal_stresses_2 = np.append(self.internal_stresses_2,
-                                                 [[float(self.youngs_modulus) * float(
-                                                     self.organized_stripped_data_2[i][
-                                                         int(self.channels[0])]) / 1000000,
-                                                   float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_2[i][
-                                                           int(self.channels[1])]) / 1000000,
-                                                   float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_2[i][
-                                                           int(self.channels[2])]) / 1000000,
-                                                   float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_2[i][
-                                                           int(self.channels[3])]) / 1000000,
-                                                   float(self.youngs_modulus) * float(
-                                                       self.organized_stripped_data_2[i][
-                                                           int(self.channels[4])]) / 1000000]],
+        self.internal_stresses_2 = np.array([]).reshape(0, int(self.no_of_graphs))
+        for i in range(int(self.no_of_graphs)):
+            for j in range(len(self.organized_stripped_data_2)):
+                self.internal_stresses_2 = np.append(self.internal_stresses_2,
+                                                  [float(self.youngs_modulus) * float(
+                                                     self.organized_stripped_data_2[j][
+                                                         int(self.channels[i])]) / 1000000],
                                                  axis=0)
 
     def counting(self):
@@ -248,7 +233,8 @@ class Data:
 
         self.stress_ranges_1 = []
         self.outer_range_1 = max_stress_1 - min_stress_1
-        self.range_factor_1 = int(round(self.outer_range_1 / int(self.amount_of_ranges), 1))
+        self.range_factor_1 = round(self.outer_range_1 / int(self.amount_of_ranges), 1)
+
         for i in range(int(round(self.outer_range_1 / self.range_factor_1, 1)) - 1):
             self.stress_ranges_1.append(min_stress_1 + self.range_factor_1 * i)
 
@@ -285,7 +271,8 @@ class Data:
 
         self.stress_ranges_2 = []
         self.outer_range_2 = max_stress_2 - min_stress_2
-        self.range_factor_2 = int(round(self.outer_range_1 / int(self.amount_of_ranges), 1))
+        self.range_factor_2 = round(self.outer_range_1 / int(self.amount_of_ranges), 1)
+
         for i in range(int(round(self.outer_range_2 / self.range_factor_2, 1)) - 1):
             self.stress_ranges_2.append(min_stress_2 + self.range_factor_2 * i)
 
@@ -341,14 +328,14 @@ class Data:
         for i in range(int(round((len(self.organized_stripped_data_2[:, 0])) / 1000, 1))):
             line_horizontal_ticks_2.append(self.organized_stripped_data_2[i * 1000, 0])
 
-        plot_title = [self.channel_names[0] + ' [MPa]', self.channel_names[1] + ' [MPa]',
-                      self.channel_names[2] + ' [MPa]', self.channel_names[3] + ' [MPa]',
-                      self.channel_names[4] + ' [MPa]']
+        plot_title = []
+        for i in range(int(self.no_of_graphs)):
+            plot_title.append(self.channel_names[i] + ' [MPa]')
 
         # Bar plot 1
         plt.figure(1, figsize=(20, 13))
-        for j in range(5):
-            plt.subplot(5, self.integrated, j * self.no_of_subplots + 1)
+        for j in range(int(self.no_of_graphs)):
+            plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + 1)
             plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.8, align='edge', color='k',
                     label=str(os.path.basename(self.file_name_1)))
             plt.grid(True)
@@ -359,7 +346,7 @@ class Data:
             plt.legend()
             plt.tight_layout()
 
-            plt.subplot(5, self.integrated, j * self.no_of_subplots + self.integrated)
+            plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + self.integrated)
             plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], 0.8, align='edge', color='r',
                     label=str(os.path.basename(self.file_name_2)))
             plt.title(plot_title[j])
@@ -372,8 +359,8 @@ class Data:
 
         # Normal plot
         plt.figure(2, figsize=(20, 13))
-        for i in range(5):
-            plt.subplot(5, self.integrated, i * self.no_of_subplots + 1)
+        for i in range(int(self.no_of_graphs)):
+            plt.subplot(self.no_of_graphs, self.integrated, i * self.no_of_subplots + 1)
             plt.plot(self.organized_stripped_data_1[:, 0], self.internal_stresses_1[:, i], linewidth=0.4,
                      color='k', label=str(os.path.basename(self.file_name_1)))
             plt.minorticks_on()
@@ -386,7 +373,7 @@ class Data:
             plt.legend()
             plt.tight_layout()
 
-            plt.subplot(5, self.integrated, i * self.no_of_subplots + self.integrated)
+            plt.subplot(int(self.no_of_graphs), self.integrated, i * self.no_of_subplots + self.integrated)
             plt.plot(self.organized_stripped_data_2[:, 0], self.internal_stresses_2[:, i], linewidth=0.4,
                      color='r', label=str(os.path.basename(self.file_name_2)))
             plt.minorticks_on()
