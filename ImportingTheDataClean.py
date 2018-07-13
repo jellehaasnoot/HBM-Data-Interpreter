@@ -107,19 +107,7 @@ class Data:
         self.opened_file_2.close()
 
     def user_input(self):
-        self.integrated = input('Do you want the two graphs to be viewed as integrated? Type [yes] or [no]: ')
-
-        if self.integrated == 'yes' or self.integrated == 'Yes':
-            self.integrated = 1
-            self.no_of_subplots = 1
-        elif self.integrated == 'no' or self.integrated == 'No':
-            self.integrated = 2
-            self.no_of_subplots = 2
-        else:
-            print('That was not a valid input. Please restart the program.')
-            sys.exit()
-
-        self.no_of_graphs = input('\nHow many graphs do you want to display? Type a number, max. is 5: ')
+        self.no_of_graphs = input('How many strain gauges do you want to process? Type a number, max. is 5: ')
         if int(self.no_of_graphs) > 5 or int(self.no_of_graphs) <= 0:
             print('That is not an option. Please restart the program.')
             sys.exit()
@@ -142,8 +130,32 @@ class Data:
                 print('That is not an allowed entry. Please restart the program.')
                 sys.exit()
 
+        self.to_print = input('\nDo you want the graphs to be shown? Type [yes] or [no]: ')
+        if self.to_print == 'yes' or self.to_print == 'Yes' or self.to_print == 'y' or self.to_print == 'Y':
+            self.to_print_result = 1
+        elif self.to_print == 'no' or self.to_print == 'No' or self.to_print == 'n' or self.to_print == 'N':
+            self.to_print_result = 0
+        else:
+            print('That was not a valid input. Please restart the program.')
+            sys.exit()
+
+        if self.to_print_result == 1:
+            self.integrated = input('\nDo you want the two graphs to be viewed as integrated? Type [yes] or [no]: ')
+            if self.integrated == 'yes' or self.integrated == 'Yes' or self.integrated == 'y' or self.integrated == 'Y':
+                self.integrated = 1
+                self.no_of_subplots = 1
+            elif self.integrated == 'no' or self.integrated == 'No' or self.integrated == 'n' or self.integrated == 'N':
+                self.integrated = 2
+                self.no_of_subplots = 2
+            else:
+                print('That was not a valid input. Please restart the program.')
+                sys.exit()
+
+        else:
+            pass
+
         self.channel_names = input(
-            '\nWhat do you want to call these channels, in the same order as you gave them above? Give five names, now separated by commas (multiple words possible): ')
+            '\nWhat do you want to call the channels, in the same order as you gave them above? Give max. five names, now separated by commas (multiple words possible): ')
         self.channel_names = [x.strip() for x in self.channel_names.split(',')]
         if len(self.channel_names) != int(self.no_of_graphs):
             print('That is not as many names as there are graphs to be viewed. Please restart the program.')
@@ -224,7 +236,7 @@ class Data:
         self.outer_range_1 = max_stress_1 - min_stress_1
         self.range_factor_1 = round(self.outer_range_1 / int(self.amount_of_ranges), 1)
 
-        for i in range(int(round(self.outer_range_1 / self.range_factor_1, 1))):
+        for i in range(int(round(self.outer_range_1 / self.range_factor_1, 1)) - 1):
             self.stress_ranges_1.append(min_stress_1 + self.range_factor_1 * i)
 
         # Defining the counter of datapoints. When a certain datapoint falls between two of the above defined ranges, it is counted as being in that range.
@@ -242,7 +254,10 @@ class Data:
                 sum_of_peaks_in_range_one_column_1.append(counter)
             self.sum_of_peaks_in_range_all_columns_1.append(sum_of_peaks_in_range_one_column_1)
 
-        self.sum_of_peaks_in_all_ranges_1 = [[], [], [], [], []]
+        self.sum_of_peaks_in_all_ranges_1 = []
+        for i in range(int(self.no_of_graphs)):
+            self.sum_of_peaks_in_all_ranges_1.append([])
+
         for i in range(len(self.sum_of_peaks_in_range_all_columns_1)):
             for j in range(len(self.sum_of_peaks_in_range_all_columns_1[i])):
                 self.sum_of_peaks_in_all_ranges_1[j].append(self.sum_of_peaks_in_range_all_columns_1[i][j])
@@ -262,7 +277,7 @@ class Data:
         self.outer_range_2 = max_stress_2 - min_stress_2
         self.range_factor_2 = round(self.outer_range_1 / int(self.amount_of_ranges), 1)
 
-        for i in range(int(round(self.outer_range_2 / self.range_factor_2, 1))):
+        for i in range(int(round(self.outer_range_2 / self.range_factor_2, 1)) - 1):
             self.stress_ranges_2.append(min_stress_2 + self.range_factor_2 * i)
 
         # Defining the counter of datapoints. When a certain datapoint falls between two of the above defined ranges, it is counted as being in that range.
@@ -280,7 +295,10 @@ class Data:
                 sum_of_peaks_in_range_one_column_2.append(counter)
             self.sum_of_peaks_in_range_all_columns_2.append(sum_of_peaks_in_range_one_column_2)
 
-        self.sum_of_peaks_in_all_ranges_2 = [[], [], [], [], []]
+        self.sum_of_peaks_in_all_ranges_2 = []
+        for i in range(int(self.no_of_graphs)):
+            self.sum_of_peaks_in_all_ranges_2.append([])
+
         for i in range(len(self.sum_of_peaks_in_range_all_columns_2)):
             for j in range(len(self.sum_of_peaks_in_range_all_columns_2[i])):
                 self.sum_of_peaks_in_all_ranges_2[j].append(self.sum_of_peaks_in_range_all_columns_2[i][j])
@@ -297,7 +315,7 @@ class Data:
         bar_vertical_axis_1 = self.sum_of_peaks_in_all_ranges_1
 
         bar_horizontal_ticks_1 = []
-        bar_horizontal_ticks_1_factor = int(round(len(self.stress_ranges_1) / 10, 1))
+        bar_horizontal_ticks_1_factor = int(round(len(self.stress_ranges_1) / 15, 1))
         for i in range(int(round((len(self.stress_ranges_1)) / bar_horizontal_ticks_1_factor, 1))):
             bar_horizontal_ticks_1.append(self.stress_ranges_1[i * bar_horizontal_ticks_1_factor])
 
@@ -312,7 +330,7 @@ class Data:
         bar_vertical_axis_2 = self.sum_of_peaks_in_all_ranges_2
 
         bar_horizontal_ticks_2 = []
-        bar_horizontal_ticks_2_factor = int(round(len(self.stress_ranges_2) / 10, 1))
+        bar_horizontal_ticks_2_factor = int(round(len(self.stress_ranges_2) / 15, 1))
         for i in range(int(round((len(self.stress_ranges_2)) / bar_horizontal_ticks_2_factor, 1))):
             bar_horizontal_ticks_2.append(self.stress_ranges_2[i * bar_horizontal_ticks_2_factor])
 
@@ -326,10 +344,10 @@ class Data:
             plot_title.append(self.channel_names[i] + ' [MPa]')
 
         # Bar plot 1
-        plt.figure(1, figsize=(18, 12))
+        plt.figure(1, figsize=(18, 10))
         for j in range(int(self.no_of_graphs)):
             plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + 1)
-            plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.1 * round(60 / len(self.stress_ranges_1), 1), align='edge', color='k',
+            plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.2 * round(60 / len(self.stress_ranges_1), 1), align='edge', color='k',
                     label=str(os.path.basename(self.file_name_1)))
             plt.grid(True)
             plt.title(plot_title[j])
@@ -340,7 +358,7 @@ class Data:
             plt.tight_layout()
 
             plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + self.integrated)
-            plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], 0.1 * round(60 / len(self.stress_ranges_2), 1), align='edge', color='r',
+            plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], 0.2 * round(60 / len(self.stress_ranges_2), 1), align='edge', color='r',
                     label=str(os.path.basename(self.file_name_2)))
             plt.title(plot_title[j])
             plt.grid(True)
@@ -351,7 +369,7 @@ class Data:
             plt.tight_layout()
 
         # Normal plot
-        plt.figure(2, figsize=(18, 12))
+        plt.figure(2, figsize=(18, 10))
         for i in range(int(self.no_of_graphs)):
             plt.subplot(int(self.no_of_graphs), self.integrated, i * self.no_of_subplots + 1)
             plt.plot(self.organized_stripped_data_1.T[0], self.internal_stresses_1[i], linewidth=0.6,
@@ -360,7 +378,12 @@ class Data:
             plt.grid(b=True, which='major', linestyle='-')
             plt.grid(b=True, which='minor', linestyle='--')
             plt.title(plot_title[i])
-            plt.xticks(line_horizontal_ticks_1)
+            if self.integrated == 1 and len(line_horizontal_ticks_2) >= len(line_horizontal_ticks_1):
+                plt.xticks(line_horizontal_ticks_2, color='r')
+            elif self.integrated == 1 and len(line_horizontal_ticks_2) <= len(line_horizontal_ticks_1):
+                plt.xticks(line_horizontal_ticks_1)
+            elif self.integrated == 2:
+                plt.xticks(line_horizontal_ticks_1)
             plt.xlabel('Tijd [s]')
             plt.ylabel('Interne Spanning [MPa]')
             plt.legend()
@@ -373,18 +396,73 @@ class Data:
             plt.grid(b=True, which='major', linestyle='-')
             plt.grid(b=True, which='minor', linestyle='--')
             plt.title(plot_title[i])
-            plt.xticks(line_horizontal_ticks_2, color='r')
+            if self.integrated == 1 and len(line_horizontal_ticks_2) >= len(line_horizontal_ticks_1):
+                plt.xticks(line_horizontal_ticks_2, color='r')
+            elif self.integrated == 1 and len(line_horizontal_ticks_2) <= len(line_horizontal_ticks_1):
+                plt.xticks(line_horizontal_ticks_1)
+            elif self.integrated == 2:
+                plt.xticks(line_horizontal_ticks_2, color='r')
             plt.xlabel('Tijd [s]')
             plt.ylabel('Interne Spanning [MPa]')
             plt.legend()
             plt.tight_layout()
 
         plt.show()
+        plt.close()
+
+    def cls(self):
+        clear = "\n" * 5
+        print(clear)
 
     def plotting_statistics(self):
         """
         In this function, some of the basic statistics of each file will be displayed. Among these are, for example, what range has the highest amount of datapoints in it, or how long is the file, etc.
         """
+
+        #Amount of tab difference after names
+        name_length_1 = len(os.path.basename(self.file_name_1))
+        name_length_2 = len(os.path.basename(self.file_name_2))
+
+        name_length_difference = (name_length_1 - name_length_2)
+        name_tabs_difference = int(round(abs(name_length_difference) / 4, 1))
+
+        if name_length_difference < 0:
+            amount_of_tabs_1 = "\t" * (name_tabs_difference + 5)
+            amount_of_tabs_2 = "\t" * 5
+        elif name_length_difference > 0:
+            amount_of_tabs_1 = "\t" * 5
+            amount_of_tabs_2 = "\t" * (name_tabs_difference + 5)
+        else:
+            amount_of_tabs_1 = "\t" * 5
+            amount_of_tabs_2 = "\t" * 5
+
+        # Collecting statistics for the first file:
+        print("File 1")
+        max_range_columns_1 = []
+        max_range_columns_indices_1 = []
+        for i in range(len(self.sum_of_peaks_in_all_ranges_1)):
+            max_range_columns_1.append(max(self.sum_of_peaks_in_all_ranges_1[i]))
+            max_range_columns_indices_1.append(self.sum_of_peaks_in_all_ranges_1[i].index(max_range_columns_1[i]))
+
+        max_range_1 = max(max_range_columns_1)
+        max_range_1_index = max_range_columns_1.index(max_range_1)
+        print("The maximum occuring stress in " + str(os.path.basename(self.file_name_1)) + " is in the range from: " + amount_of_tabs_1 + "%.2f" % self.stress_ranges_1[max_range_1_index] + " to " + "%.2f" % self.stress_ranges_1[max_range_1_index + 1] + " MPa.")
+        print("The times this stress occurs in " + str(os.path.basename(self.file_name_1)) + " is: " + amount_of_tabs_1 + "\t\t\t\t\t" + "%.0f" % max_range_1 + " times.")
+        print("The strain gauge channel in which the highest stress occured in " + str(os.path.basename(self.file_name_1)) + " is: \t" + amount_of_tabs_1 + "%.0f" % (max_range_1_index + 1) + ".")
+
+        # Collecting statistics for the second file:
+        print("\n File 2")
+        max_range_columns_2 = []
+        max_range_columns_indices_2 = []
+        for i in range(len(self.sum_of_peaks_in_all_ranges_2)):
+            max_range_columns_2.append(max(self.sum_of_peaks_in_all_ranges_2[i]))
+            max_range_columns_indices_2.append(self.sum_of_peaks_in_all_ranges_2[i].index(max_range_columns_2[i]))
+
+        max_range_2 = max(max_range_columns_2)
+        max_range_2_index = max_range_columns_2.index(max_range_2)
+        print("The maximum occuring stress in " + str(os.path.basename(self.file_name_2)) + " is in the range from: " + amount_of_tabs_2 + "%.2f" % self.stress_ranges_2[max_range_2_index] + " to " + "%.2f" % self.stress_ranges_2[max_range_2_index + 1] + " MPa.")
+        print("The times this stress occurs in " + str(os.path.basename(self.file_name_2)) + " is: " + amount_of_tabs_2 + "\t\t\t\t" + "%.0f" % max_range_2 + " times.")
+        print("The strain gauge channel in which the highest stress occured in " + str(os.path.basename(self.file_name_2)) + " is: " + amount_of_tabs_2 + "%.0f" % (max_range_2_index + 1) + ".")
 
 # Plot settings
 np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
@@ -398,4 +476,9 @@ data.user_input()
 data.organizing()
 data.calculations()
 data.counting()
-data.plotting()
+data.cls()
+data.plotting_statistics()
+if data.to_print_result == 1:
+    data.plotting()
+else:
+    pass
