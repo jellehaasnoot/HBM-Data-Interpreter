@@ -16,8 +16,8 @@
       <file leaf-file-name="ImportingTheDataClean.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ImportingTheDataClean.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="336" column="24" lean-forward="true" selection-start-line="336" selection-start-column="24" selection-end-line="336" selection-end-column="24" />
+            <state relative-caret-position="443">
+              <caret line="319" column="85" selection-start-line="319" selection-start-column="85" selection-end-line="319" selection-end-column="85" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -203,6 +203,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13066386" />
       <window_info active="true" anchor="bottom" x="31" y="874" width="2508" height="431" id="Run" order="2" visible="true" weight="0.34827945" />
@@ -362,8 +363,8 @@
     <entry file="file://$PROJECT_DIR$/Intermediate_Text_File_1.txt" />
     <entry file="file://$PROJECT_DIR$/ImportingTheDataClean.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="336" column="24" lean-forward="true" selection-start-line="336" selection-start-column="24" selection-end-line="336" selection-end-column="24" />
+        <state relative-caret-position="443">
+          <caret line="319" column="85" selection-start-line="319" selection-start-column="85" selection-end-line="319" selection-end-column="85" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

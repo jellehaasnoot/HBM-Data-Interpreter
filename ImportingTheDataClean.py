@@ -302,8 +302,9 @@ class Data:
             bar_horizontal_ticks_1.append(self.stress_ranges_1[i * bar_horizontal_ticks_1_factor])
 
         line_horizontal_ticks_1 = []
-        for i in range(int(round((len(self.organized_stripped_data_1[:, 0])) / 1000, 1))):
-            line_horizontal_ticks_1.append(self.organized_stripped_data_1[i * 1000, 0])
+        line_horizontal_ticks_1_factor = int(round(len(self.organized_stripped_data_1) / 10))
+        for i in range(10):
+            line_horizontal_ticks_1.append(self.organized_stripped_data_1[i * line_horizontal_ticks_1_factor, 0])
 
         # File 2
         del self.stress_ranges_2[-1]
@@ -316,8 +317,9 @@ class Data:
             bar_horizontal_ticks_2.append(self.stress_ranges_2[i * bar_horizontal_ticks_2_factor])
 
         line_horizontal_ticks_2 = []
-        for i in range(int(round((len(self.organized_stripped_data_2[:, 0])) / 1000, 1))):
-            line_horizontal_ticks_2.append(self.organized_stripped_data_2[i * 1000, 0])
+        line_horizontal_ticks_2_factor = int(round(len(self.organized_stripped_data_2) / 10))
+        for i in range(10):
+            line_horizontal_ticks_2.append(self.organized_stripped_data_2[i * line_horizontal_ticks_2_factor, 0])
 
         plot_title = []
         for i in range(int(self.no_of_graphs)):
@@ -379,6 +381,10 @@ class Data:
 
         plt.show()
 
+    def plotting_statistics(self):
+        """
+        In this function, some of the basic statistics of each file will be displayed. Among these are, for example, what range has the highest amount of datapoints in it, or how long is the file, etc.
+        """
 
 # Plot settings
 np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
