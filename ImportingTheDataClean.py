@@ -119,7 +119,7 @@ class Data:
             print('That was not a valid input. Please restart the program.')
             sys.exit()
 
-        self.no_of_graphs = input('How many graphs do you want to display? Type a number, max. is 5: ')
+        self.no_of_graphs = input('\nHow many graphs do you want to display? Type a number, max. is 5: ')
         if int(self.no_of_graphs) > 5 or int(self.no_of_graphs) <= 0:
             print('That is not an option. Please restart the program.')
             sys.exit()
@@ -127,7 +127,7 @@ class Data:
             pass
 
         self.channels = input(
-            'Which channels do you want to display in the graphs? Type max. 5 numbers, all below or equal to 16, separated by spaces: ')
+            '\nWhich channels do you want to display in the graphs? Type max. 5 numbers, all below or equal to 16, separated by spaces: ')
         self.channels = [x.strip() for x in self.channels.split()]
         if len(self.channels) != int(self.no_of_graphs):
             print('That is not a valid entry. Please restart the program.')
@@ -143,23 +143,23 @@ class Data:
                 sys.exit()
 
         self.channel_names = input(
-            'What do you want to call these channels, in the same order as you gave them above? Give five names, now separated by commas (multiple words possible): ')
+            '\nWhat do you want to call these channels, in the same order as you gave them above? Give five names, now separated by commas (multiple words possible): ')
         self.channel_names = [x.strip() for x in self.channel_names.split(',')]
         if len(self.channel_names) != int(self.no_of_graphs):
-            print('That is not a valid entry. Please restart the program.')
+            print('That is not as many names as there are graphs to be viewed. Please restart the program.')
             sys.exit()
         else:
             pass
 
         self.amount_of_ranges = input(
-            'In how many parts should the data be divided? In other words, how many ranges should be visible? Type a number: ')
+            '\nIn how many parts should the data be divided? In other words, how many ranges should be visible? Type a number: ')
         if int(self.amount_of_ranges) <= 0:
             print('This is not a valid input. Please restart the program.')
             sys.exit()
         else:
             pass
 
-        self.youngs_modulus = input('What is the Youngs Modulus of the material, in MPa? Enter only rounded values: ')
+        self.youngs_modulus = input('\nWhat is the Youngs Modulus of the material, in MPa? Enter only rounded values: ')
         if int(self.youngs_modulus) <= 0:
             print('This is not a valid number. Please restart the program.')
             sys.exit()
@@ -195,7 +195,6 @@ class Data:
         """
         # File 1
         self.internal_stresses_1 = [] #np.array([]).reshape(0, int(self.no_of_graphs))
-        print(self.organized_stripped_data_1[:, 0])
         for i in range(int(self.no_of_graphs)):
             self.internal_stresses_1.append(float(self.youngs_modulus) * self.organized_stripped_data_1[:, int(self.channels[i])] / 1000000)
 
@@ -225,7 +224,7 @@ class Data:
         self.outer_range_1 = max_stress_1 - min_stress_1
         self.range_factor_1 = round(self.outer_range_1 / int(self.amount_of_ranges), 1)
 
-        for i in range(int(round(self.outer_range_1 / self.range_factor_1, 1)) - 1):
+        for i in range(int(round(self.outer_range_1 / self.range_factor_1, 1))):
             self.stress_ranges_1.append(min_stress_1 + self.range_factor_1 * i)
 
         # Defining the counter of datapoints. When a certain datapoint falls between two of the above defined ranges, it is counted as being in that range.
@@ -263,7 +262,7 @@ class Data:
         self.outer_range_2 = max_stress_2 - min_stress_2
         self.range_factor_2 = round(self.outer_range_1 / int(self.amount_of_ranges), 1)
 
-        for i in range(int(round(self.outer_range_2 / self.range_factor_2, 1)) - 1):
+        for i in range(int(round(self.outer_range_2 / self.range_factor_2, 1))):
             self.stress_ranges_2.append(min_stress_2 + self.range_factor_2 * i)
 
         # Defining the counter of datapoints. When a certain datapoint falls between two of the above defined ranges, it is counted as being in that range.
@@ -298,8 +297,9 @@ class Data:
         bar_vertical_axis_1 = self.sum_of_peaks_in_all_ranges_1
 
         bar_horizontal_ticks_1 = []
-        for i in range(int(round((len(self.stress_ranges_2)) / 4, 1))):
-            bar_horizontal_ticks_1.append(self.stress_ranges_1[i * 4])
+        bar_horizontal_ticks_1_factor = int(round(len(self.stress_ranges_1) / 10, 1))
+        for i in range(int(round((len(self.stress_ranges_1)) / bar_horizontal_ticks_1_factor, 1))):
+            bar_horizontal_ticks_1.append(self.stress_ranges_1[i * bar_horizontal_ticks_1_factor])
 
         line_horizontal_ticks_1 = []
         for i in range(int(round((len(self.organized_stripped_data_1[:, 0])) / 1000, 1))):
@@ -311,8 +311,9 @@ class Data:
         bar_vertical_axis_2 = self.sum_of_peaks_in_all_ranges_2
 
         bar_horizontal_ticks_2 = []
-        for i in range(int(round((len(self.stress_ranges_2)) / 4, 1))):
-            bar_horizontal_ticks_2.append(self.stress_ranges_2[i * 4])
+        bar_horizontal_ticks_2_factor = int(round(len(self.stress_ranges_2) / 10, 1))
+        for i in range(int(round((len(self.stress_ranges_2)) / bar_horizontal_ticks_2_factor, 1))):
+            bar_horizontal_ticks_2.append(self.stress_ranges_2[i * bar_horizontal_ticks_2_factor])
 
         line_horizontal_ticks_2 = []
         for i in range(int(round((len(self.organized_stripped_data_2[:, 0])) / 1000, 1))):
@@ -323,10 +324,10 @@ class Data:
             plot_title.append(self.channel_names[i] + ' [MPa]')
 
         # Bar plot 1
-        plt.figure(1, figsize=(18, 13))
+        plt.figure(1, figsize=(18, 12))
         for j in range(int(self.no_of_graphs)):
             plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + 1)
-            plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.8, align='edge', color='k',
+            plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.1 * round(60 / len(self.stress_ranges_1), 1), align='edge', color='k',
                     label=str(os.path.basename(self.file_name_1)))
             plt.grid(True)
             plt.title(plot_title[j])
@@ -337,7 +338,7 @@ class Data:
             plt.tight_layout()
 
             plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + self.integrated)
-            plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], 0.8, align='edge', color='r',
+            plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], 0.1 * round(60 / len(self.stress_ranges_2), 1), align='edge', color='r',
                     label=str(os.path.basename(self.file_name_2)))
             plt.title(plot_title[j])
             plt.grid(True)
@@ -348,10 +349,10 @@ class Data:
             plt.tight_layout()
 
         # Normal plot
-        plt.figure(2, figsize=(18, 13))
+        plt.figure(2, figsize=(18, 12))
         for i in range(int(self.no_of_graphs)):
-            plt.subplot(self.no_of_graphs, self.integrated, i * self.no_of_subplots + 1)
-            plt.plot(self.organized_stripped_data_1.T[0], self.internal_stresses_1[i], linewidth=0.4,
+            plt.subplot(int(self.no_of_graphs), self.integrated, i * self.no_of_subplots + 1)
+            plt.plot(self.organized_stripped_data_1.T[0], self.internal_stresses_1[i], linewidth=0.6,
                      color='k', label=str(os.path.basename(self.file_name_1)))
             plt.minorticks_on()
             plt.grid(b=True, which='major', linestyle='-')
@@ -364,7 +365,7 @@ class Data:
             plt.tight_layout()
 
             plt.subplot(int(self.no_of_graphs), self.integrated, i * self.no_of_subplots + self.integrated)
-            plt.plot(self.organized_stripped_data_2.T[0], self.internal_stresses_2[i], linewidth=0.4,
+            plt.plot(self.organized_stripped_data_2.T[0], self.internal_stresses_2[i], linewidth=0.6,
                      color='r', label=str(os.path.basename(self.file_name_2)))
             plt.minorticks_on()
             plt.grid(b=True, which='major', linestyle='-')

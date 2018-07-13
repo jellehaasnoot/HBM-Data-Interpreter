@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6b913f9-ccb3-47d5-b775-7a37ee5ab492" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$" beforeDir="false" afterPath="$PROJECT_DIR$" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImportingTheDataClean.py" beforeDir="false" afterPath="$PROJECT_DIR$/ImportingTheDataClean.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +16,8 @@
       <file leaf-file-name="ImportingTheDataClean.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ImportingTheDataClean.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="365" column="21" selection-start-line="365" selection-start-column="21" selection-end-line="365" selection-end-column="21" />
+            <state relative-caret-position="277">
+              <caret line="336" column="24" lean-forward="true" selection-start-line="336" selection-start-column="24" selection-end-line="336" selection-end-column="24" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -205,10 +202,9 @@
     <configuration>C:\Users\Jelle\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13507625" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13066386" />
       <window_info active="true" anchor="bottom" x="31" y="874" width="2508" height="431" id="Run" order="2" visible="true" weight="0.34827945" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.24184988" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.25777104" />
@@ -366,8 +362,8 @@
     <entry file="file://$PROJECT_DIR$/Intermediate_Text_File_1.txt" />
     <entry file="file://$PROJECT_DIR$/ImportingTheDataClean.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="365" column="21" selection-start-line="365" selection-start-column="21" selection-end-line="365" selection-end-column="21" />
+        <state relative-caret-position="277">
+          <caret line="336" column="24" lean-forward="true" selection-start-line="336" selection-start-column="24" selection-end-line="336" selection-end-column="24" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
