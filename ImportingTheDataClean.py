@@ -271,11 +271,11 @@ class Data:
         for j in range(len(self.stress_ranges_2) - 1):
             sum_of_peaks_in_range_one_column_2 = []
 
-            for i in range(len(self.internal_stresses_2[1])):
+            for i in range(len(self.internal_stresses_2)):
                 counter = 0
 
-                for k in range(len(self.internal_stresses_2)):
-                    if self.stress_ranges_2[j] < self.internal_stresses_2[k, i] < self.stress_ranges_2[j + 1]:
+                for k in range(len(self.internal_stresses_2[0])):
+                    if self.stress_ranges_2[j] < self.internal_stresses_2[i][k] < self.stress_ranges_2[j + 1]:
                         counter += 1
 
                 sum_of_peaks_in_range_one_column_2.append(counter)
@@ -323,7 +323,7 @@ class Data:
             plot_title.append(self.channel_names[i] + ' [MPa]')
 
         # Bar plot 1
-        plt.figure(1, figsize=(20, 13))
+        plt.figure(1, figsize=(18, 13))
         for j in range(int(self.no_of_graphs)):
             plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + 1)
             plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.8, align='edge', color='k',
@@ -348,10 +348,10 @@ class Data:
             plt.tight_layout()
 
         # Normal plot
-        plt.figure(2, figsize=(20, 13))
+        plt.figure(2, figsize=(18, 13))
         for i in range(int(self.no_of_graphs)):
             plt.subplot(self.no_of_graphs, self.integrated, i * self.no_of_subplots + 1)
-            plt.plot(self.organized_stripped_data_1[:, 0], self.internal_stresses_1[:, i], linewidth=0.4,
+            plt.plot(self.organized_stripped_data_1.T[0], self.internal_stresses_1[i], linewidth=0.4,
                      color='k', label=str(os.path.basename(self.file_name_1)))
             plt.minorticks_on()
             plt.grid(b=True, which='major', linestyle='-')
@@ -364,7 +364,7 @@ class Data:
             plt.tight_layout()
 
             plt.subplot(int(self.no_of_graphs), self.integrated, i * self.no_of_subplots + self.integrated)
-            plt.plot(self.organized_stripped_data_2[:, 0], self.internal_stresses_2[:, i], linewidth=0.4,
+            plt.plot(self.organized_stripped_data_2.T[0], self.internal_stresses_2[i], linewidth=0.4,
                      color='r', label=str(os.path.basename(self.file_name_2)))
             plt.minorticks_on()
             plt.grid(b=True, which='major', linestyle='-')
