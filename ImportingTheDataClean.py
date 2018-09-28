@@ -206,14 +206,16 @@ class Data:
         known stress.
         """
         # File 1
-        self.internal_stresses_1 = [] #np.array([]).reshape(0, int(self.no_of_graphs))
+        self.internal_stresses_1 = []  # np.array([]).reshape(0, int(self.no_of_graphs))
         for i in range(int(self.no_of_graphs)):
-            self.internal_stresses_1.append(float(self.youngs_modulus) * self.organized_stripped_data_1[:, int(self.channels[i])] / 1000000)
+            self.internal_stresses_1.append(
+                float(self.youngs_modulus) * self.organized_stripped_data_1[:, int(self.channels[i])] / 1000000)
 
         # File 2
-        self.internal_stresses_2 = [] #np.array([]).reshape(0, int(self.no_of_graphs))
+        self.internal_stresses_2 = []  # np.array([]).reshape(0, int(self.no_of_graphs))
         for i in range(int(self.no_of_graphs)):
-            self.internal_stresses_2.append(float(self.youngs_modulus) * self.organized_stripped_data_2[:, int(self.channels[i])] / 1000000)
+            self.internal_stresses_2.append(
+                float(self.youngs_modulus) * self.organized_stripped_data_2[:, int(self.channels[i])] / 1000000)
 
     def counting(self):
         """
@@ -237,8 +239,6 @@ class Data:
         self.range_factor_1 = self.outer_range_1 / int(self.amount_of_ranges)
         for i in range(int(round(self.outer_range_1 / self.range_factor_1, 1)) - 1):
             self.stress_ranges_1.append(min_stress_1 + self.range_factor_1 * i)
-
-
 
         # Defining the counter of datapoints. When a certain datapoint falls between two of the above defined ranges, it is counted as being in that range.
         self.sum_of_peaks_in_range_all_columns_1 = []
@@ -348,7 +348,8 @@ class Data:
         plt.figure(1, figsize=(18, 10))
         for j in range(int(self.no_of_graphs)):
             plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + 1)
-            plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.2 * round(60 / len(self.stress_ranges_1), 1), align='edge', color='k',
+            plt.bar(bar_horizontal_axis_1, bar_vertical_axis_1[j], 0.2 * round(60 / len(self.stress_ranges_1), 1),
+                    align='edge', color='k',
                     label=str(os.path.basename(self.file_name_1)))
             plt.grid(True)
             plt.title(plot_title[j])
@@ -359,7 +360,8 @@ class Data:
             plt.tight_layout()
 
             plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + self.integrated)
-            plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], -0.2 * round(60 / len(self.stress_ranges_2), 1), align='edge', color='r',
+            plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], -0.2 * round(60 / len(self.stress_ranges_2), 1),
+                    align='edge', color='r',
                     label=str(os.path.basename(self.file_name_2)))
             plt.title(plot_title[j])
             plt.grid(True)
@@ -420,7 +422,7 @@ class Data:
         In this function, some of the basic statistics of each file will be displayed. Among these are, for example, what range has the highest amount of datapoints in it, or how long is the file, etc.
         """
 
-        #Amount of tab difference after names
+        # Amount of tab difference after names
         name_length_1 = len(os.path.basename(self.file_name_1))
         name_length_2 = len(os.path.basename(self.file_name_2))
 
@@ -447,9 +449,14 @@ class Data:
 
         max_range_1 = max(max_range_columns_1)
         max_range_1_index = max_range_columns_1.index(max_range_1)
-        print("The maximum occuring stress in " + str(os.path.basename(self.file_name_1)) + " is in the range from: " + amount_of_tabs_1 + "%.2f" % self.stress_ranges_1[max_range_1_index] + " to " + "%.2f" % self.stress_ranges_1[max_range_1_index + 1] + " MPa.")
-        print("The times this stress occurs in " + str(os.path.basename(self.file_name_1)) + " is: " + amount_of_tabs_1 + "\t\t\t\t\t" + "%.0f" % max_range_1 + " times.")
-        print("The strain gauge channel in which the highest stress occured in " + str(os.path.basename(self.file_name_1)) + " is: \t" + amount_of_tabs_1 + "%.0f" % (max_range_1_index + 1) + ".")
+        print("The maximum occuring stress in " + str(
+            os.path.basename(self.file_name_1)) + " is in the range from: " + amount_of_tabs_1 + "%.2f" %
+              self.stress_ranges_1[max_range_1_index] + " to " + "%.2f" % self.stress_ranges_1[
+                  max_range_1_index + 1] + " MPa.")
+        print("The times this stress occurs in " + str(os.path.basename(
+            self.file_name_1)) + " is: " + amount_of_tabs_1 + "\t\t\t\t\t" + "%.0f" % max_range_1 + " times.")
+        print("The strain gauge channel in which the highest stress occured in " + str(
+            os.path.basename(self.file_name_1)) + " is: \t" + amount_of_tabs_1 + "%.0f" % (max_range_1_index + 1) + ".")
 
         # Collecting statistics for the second file:
         print("\nFile 2")
@@ -461,9 +468,15 @@ class Data:
 
         max_range_2 = max(max_range_columns_2)
         max_range_2_index = max_range_columns_2.index(max_range_2)
-        print("The maximum occuring stress in " + str(os.path.basename(self.file_name_2)) + " is in the range from: " + amount_of_tabs_2 + "%.2f" % self.stress_ranges_2[max_range_2_index] + " to " + "%.2f" % self.stress_ranges_2[max_range_2_index + 1] + " MPa.")
-        print("The times this stress occurs in " + str(os.path.basename(self.file_name_2)) + " is: " + amount_of_tabs_2 + "\t\t\t\t" + "%.0f" % max_range_2 + " times.")
-        print("The strain gauge channel in which the highest stress occured in " + str(os.path.basename(self.file_name_2)) + " is: " + amount_of_tabs_2 + "%.0f" % (max_range_2_index + 1) + ".")
+        print("The maximum occuring stress in " + str(
+            os.path.basename(self.file_name_2)) + " is in the range from: " + amount_of_tabs_2 + "%.2f" %
+              self.stress_ranges_2[max_range_2_index] + " to " + "%.2f" % self.stress_ranges_2[
+                  max_range_2_index + 1] + " MPa.")
+        print("The times this stress occurs in " + str(os.path.basename(
+            self.file_name_2)) + " is: " + amount_of_tabs_2 + "\t\t\t\t" + "%.0f" % max_range_2 + " times.")
+        print("The strain gauge channel in which the highest stress occured in " + str(
+            os.path.basename(self.file_name_2)) + " is: " + amount_of_tabs_2 + "%.0f" % (max_range_2_index + 1) + ".")
+
 
 # Plot settings
 np.set_printoptions(linewidth=400, edgeitems=18, suppress=True)
