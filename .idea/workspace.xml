@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d6b913f9-ccb3-47d5-b775-7a37ee5ab492" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/ImportingTheDataClean.py" beforeDir="false" afterPath="$PROJECT_DIR$/ImportingTheDataClean.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Tacx _ Freak _ Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Tacx _ Freak _ Python.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,8 +20,8 @@
       <file leaf-file-name="ImportingTheDataClean.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ImportingTheDataClean.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="246" column="58" selection-start-line="246" selection-start-column="58" selection-end-line="246" selection-end-column="58" />
+            <state relative-caret-position="390">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -50,6 +54,7 @@
       <find>signle</find>
       <find>]</find>
       <find>print</find>
+      <find>plt</find>
     </findStrings>
     <replaceStrings>
       <replace>sin(deg2rad(</replace>
@@ -61,6 +66,7 @@
       <replace>sum_of_peaks_in_all_ranges</replace>
       <replace>single</replace>
       <replace>)</replace>
+      <replace>matplotlib</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -83,11 +89,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="960" />
-    <option name="height" value="1087" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="961" />
+    <option name="y" value="23" />
+    <option name="width" value="1919" />
+    <option name="height" value="1597" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -95,6 +101,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Course" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -106,12 +113,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Course" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
-    <property name="settings.editor.selected.configurable" value="reference.idesettings.debugger.python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -186,15 +192,15 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
+      <item itemvalue="Python.bar_stacked" />
       <item itemvalue="Python.ImportingTheData" />
       <item itemvalue="Python.ImportingTheDataClean" />
-      <item itemvalue="Python.bar_stacked" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.ImportingTheDataClean" />
-        <item itemvalue="Python.bar_stacked" />
         <item itemvalue="Python.ImportingTheData" />
+        <item itemvalue="Python.bar_stacked" />
       </list>
     </recent_temporary>
   </component>
@@ -202,42 +208,23 @@
     <configuration>C:\Users\Jelle\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2514" height="1456" extended-state="6" />
-    <editor active="true" />
+    <frame x="961" y="23" width="1919" height="1597" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13529886" />
-      <window_info active="true" anchor="bottom" x="31" y="874" width="2508" height="431" id="Run" order="2" visible="true" weight="0.34874904" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.24184988" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.25777104" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3995451" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Data View" order="3" visible="true" weight="0.059168443" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3297953" />
-    </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Data View" order="3" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1227608" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32941943" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Python Console" order="8" />
-    </layout-to-restore>
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -269,6 +256,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
     <MESSAGE value="Commit" />
     <MESSAGE value="Cleaning service" />
     <option name="LAST_COMMIT_MESSAGE" value="Cleaning service" />
@@ -325,21 +315,9 @@
     <entry file="file://$PROJECT_DIR$/VisualizingTheData.py" />
     <entry file="file://$PROJECT_DIR$/ImportingTheDataClean-2018-07-10_08-43-49-725.py" />
     <entry file="file://$PROJECT_DIR$/ImportingTheDataClean-2018-07-10_08-50-23-525.py" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/pycharm64.exe.vmoptions">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/pycharm64.exe.vmoptions" />
     <entry file="file://$PROJECT_DIR$/Intermediate_Text_File.txt" />
-    <entry file="file://$USER_HOME$/Downloads/bar_stacked.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Downloads/bar_stacked.py" />
     <entry file="file://$PROJECT_DIR$/DAQTest2_50Hz_+Channel_info.ASC">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="28">
@@ -347,24 +325,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Peakshannel.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="8" column="157" selection-start-line="8" selection-start-column="157" selection-end-line="8" selection-end-column="157" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ImportingTheDataClean2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-360" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Peakshannel.txt" />
+    <entry file="file://$PROJECT_DIR$/ImportingTheDataClean2.py" />
     <entry file="file://$PROJECT_DIR$/Intermediate_Text_File_2.txt" />
     <entry file="file://$PROJECT_DIR$/Intermediate_Text_File_1.txt" />
     <entry file="file://$PROJECT_DIR$/ImportingTheDataClean.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="246" column="58" selection-start-line="246" selection-start-column="58" selection-end-line="246" selection-end-column="58" />
+        <state relative-caret-position="390">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
