@@ -33,7 +33,7 @@ A_rear_tube = 97.3
 A_chai_tube = 98.7
 
 # Other constants needed to calculate the stress
-mass_cyclist = 83
+mass_cyclist = 82.5
 gravitational_constant = 9.81
 
 # Calculations for gravitational stresses
@@ -234,10 +234,11 @@ class Data:
         min_stress_1 = min(min_stress_columns_1)
         self.stress_ranges_1 = []
         self.outer_range_1 = max_stress_1 - min_stress_1
-        self.range_factor_1 = round(self.outer_range_1 / int(self.amount_of_ranges), 1)
-
+        self.range_factor_1 = self.outer_range_1 / int(self.amount_of_ranges)
         for i in range(int(round(self.outer_range_1 / self.range_factor_1, 1)) - 1):
             self.stress_ranges_1.append(min_stress_1 + self.range_factor_1 * i)
+
+
 
         # Defining the counter of datapoints. When a certain datapoint falls between two of the above defined ranges, it is counted as being in that range.
         self.sum_of_peaks_in_range_all_columns_1 = []
@@ -275,7 +276,7 @@ class Data:
 
         self.stress_ranges_2 = []
         self.outer_range_2 = max_stress_2 - min_stress_2
-        self.range_factor_2 = round(self.outer_range_1 / int(self.amount_of_ranges), 1)
+        self.range_factor_2 = (self.outer_range_1 / int(self.amount_of_ranges))
 
         for i in range(int(round(self.outer_range_2 / self.range_factor_2, 1)) - 1):
             self.stress_ranges_2.append(min_stress_2 + self.range_factor_2 * i)
@@ -358,7 +359,7 @@ class Data:
             plt.tight_layout()
 
             plt.subplot(int(self.no_of_graphs), self.integrated, j * self.no_of_subplots + self.integrated)
-            plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], 0.2 * round(60 / len(self.stress_ranges_2), 1), align='edge', color='r',
+            plt.bar(bar_horizontal_axis_2, bar_vertical_axis_2[j], -0.2 * round(60 / len(self.stress_ranges_2), 1), align='edge', color='r',
                     label=str(os.path.basename(self.file_name_2)))
             plt.title(plot_title[j])
             plt.grid(True)
@@ -451,7 +452,7 @@ class Data:
         print("The strain gauge channel in which the highest stress occured in " + str(os.path.basename(self.file_name_1)) + " is: \t" + amount_of_tabs_1 + "%.0f" % (max_range_1_index + 1) + ".")
 
         # Collecting statistics for the second file:
-        print("\n File 2")
+        print("\nFile 2")
         max_range_columns_2 = []
         max_range_columns_indices_2 = []
         for i in range(len(self.sum_of_peaks_in_all_ranges_2)):
